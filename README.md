@@ -1,5 +1,7 @@
 # WebHotelier for WordPress
 
+[![CI](https://github.com/FullMetalGR/wp-hotelier/actions/workflows/ci.yml/badge.svg)](https://github.com/FullMetalGR/wp-hotelier/actions/workflows/ci.yml)
+
 A complete WordPress integration for the [WebHotelier](https://www.webhotelier.net/) Integration REST API. It wraps **every documented endpoint** in a typed PHP client, ships a full admin panel (settings, management dashboards, and a live API explorer), and renders a complete booking flow on the front end through **26 theme-overridable shortcodes**.
 
 The frontend handles search, availability and room/rate selection natively, then hands off to WebHotelier's secure hosted booking engine for the guest's details and payment — so no card data ever touches your server (PCI-safe by design).
@@ -53,10 +55,13 @@ Each shortcode accepts an optional `property=""` attribute (defaults to the conf
 
 ```bash
 composer install
-./vendor/bin/phpunit
+composer test   # PHPUnit test suite
+composer lint   # PHP_CodeSniffer (WordPress Coding Standards)
 ```
 
 The test suite uses PHPUnit with Brain Monkey + Mockery and a pluggable HTTP transport, so no network is touched. The client and all resource classes, the error/cache/handoff layers, the admin controllers, the REST proxy, every shortcode, and the booking-flow state machine are covered.
+
+Code style is enforced with PHP_CodeSniffer against the WordPress Coding Standards (`phpcs.xml.dist`); run `composer lint:fix` to auto-fix what `phpcbf` can. Both the test suite and the linter run in CI on every push and pull request.
 
 ## License
 
