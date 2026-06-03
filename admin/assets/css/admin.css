@@ -1,0 +1,35 @@
+/* WebHotelier admin styles. */
+.wh-admin h1 { margin-bottom: 8px; }
+.wh-admin .description { color: #646970; }
+
+/* Test connection result. */
+.wh-test-result { margin-top: 12px; }
+.wh-test-result.is-ok { color: #1a7f37; }
+.wh-test-result.is-error { color: #b32d2e; }
+
+/* Tables. */
+.wh-admin table.widefat { margin-top: 12px; }
+.wh-admin table.widefat th { font-weight: 600; }
+
+/* Charts. */
+.wh-stats-charts { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 16px; }
+.wh-chart { background: #fff; border: 1px solid #dcdcde; border-radius: 4px; padding: 8px; }
+.wh-chart--empty { padding: 16px; color: #646970; }
+.wh-chart rect { transition: opacity .1s ease; }
+.wh-chart rect:hover { opacity: .8; }
+
+/* Vouchers. */
+.wh-bundle-list { list-style: disc; margin-left: 20px; }
+.wh-bundle-list code { background: #f0f0f1; padding: 1px 4px; border-radius: 3px; }
+
+/* API Explorer. */
+.wh-explorer #wh-explorer-params { margin: 12px 0; }
+.wh-explorer #wh-explorer-params label { display: block; margin: 6px 0 2px; font-weight: 600; }
+.wh-explorer #wh-explorer-params input { width: 360px; max-width: 100%; }
+.wh-explorer-meta { margin: 12px 0; font-family: monospace; color: #2c3338; }
+.wh-explorer-meta .wh-explorer-ms { color: #646970; }
+.wh-explorer-output {
+	background: #1d2327; color: #e0e0e0; padding: 16px; border-radius: 4px;
+	max-height: 520px; overflow: auto; white-space: pre; font-size: 12px; line-height: 1.5;
+}
+.wh-explorer-output.is-error { color: #ff9b9b; }
