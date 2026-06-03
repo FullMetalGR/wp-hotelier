@@ -15,7 +15,7 @@
     "name": "Demo Hotel",
     "currency": "EUR",
     "url": {
-      "website": "https://www.demohotel.com/",
+      "website": "https://www.demohotel.example/",
       "info": "https://demohotel.reserve-online.net/info",
       "engine": "https://demohotel.reserve-online.net/?checkin=2026-08-01&checkout=2026-08-08&party=[{\"adults\":4}]&lang=en_GB",
       "photo": "https://cdn.webhotelier.net/photos/w=1200:h=800:q=80/properties/demo/cover.jpg"
@@ -28,7 +28,7 @@
       {
         "id": 522770,
         "type": "ZEN",
-        "room": "Villa Zen",
+        "room": "Garden Suite",
         "rate": "Non-Refundable",
         "rate_desc": "Best available non-refundable rate.",
         "payment_policy": "Full prepayment required.",
@@ -57,7 +57,7 @@
       {
         "id": 522771,
         "type": "BOHEM",
-        "room": "Villa Bohem",
+        "room": "Pool Suite",
         "rate": "Flexible",
         "rate_desc": "Free cancellation up to 30 days before arrival.",
         "payment_policy": "Deposit on booking.",

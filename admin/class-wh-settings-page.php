@@ -153,7 +153,7 @@ class WH_Settings_Page {
 		$out['api_base'] = ( '' !== $base ) ? $base : 'https://rest.reserve-online.net';
 
 		$out['mode']             = $this->enum( $input, 'mode', 'single' );
-		$out['default_property'] = isset( $input['default_property'] ) ? sanitize_text_field( strtoupper( trim( (string) $input['default_property'] ) ) ) : 'DEMO';
+		$out['default_property'] = isset( $input['default_property'] ) ? sanitize_text_field( strtoupper( trim( (string) $input['default_property'] ) ) ) : '';
 		$out['currency']         = isset( $input['currency'] ) ? strtoupper( sanitize_text_field( trim( (string) $input['currency'] ) ) ) : 'EUR';
 		$out['locale']           = isset( $input['locale'] ) ? sanitize_text_field( trim( (string) $input['locale'] ) ) : '';
 		$out['completion_mode']  = $this->enum( $input, 'completion_mode', 'hosted' );
@@ -265,7 +265,7 @@ class WH_Settings_Page {
 			return;
 		}
 		// Fallback inline render (kept testable without the view file).
-		echo '<div class="wrap"><h1>' . esc_html__( 'WebHotelier Settings', 'webhotelier' ) . '</h1>';
+		echo '<div class="wrap"><h1>' . esc_html__( 'WP Hotelier Settings', 'webhotelier' ) . '</h1>';
 		echo '<form method="post" action="options.php">';
 		settings_fields( self::GROUP );
 		do_settings_sections( self::OPTION );
@@ -322,7 +322,7 @@ class WH_Settings_Page {
 		}
 
 		// Single-property probe.
-		$code   = (string) $this->settings->get( 'default_property', 'DEMO' );
+		$code   = (string) $this->settings->get( 'default_property', '' );
 		$result = $this->property->info( $code );
 		if ( is_wp_error( $result ) ) {
 			$this->send_error_from_wp_error( $result );

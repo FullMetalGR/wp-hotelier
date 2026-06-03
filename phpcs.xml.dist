@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="WebHotelier for WordPress">
-	<description>Coding standards for the WebHotelier for WordPress plugin.</description>
+<ruleset name="WP Hotelier">
+	<description>Coding standards for the WP Hotelier plugin.</description>
 
 	<!-- Directories and files to scan. -->
 	<file>webhotelier.php</file>

@@ -17,7 +17,7 @@ final class ActivationTest extends WH_UnitTestCase {
 				return is_array( $value )
 					&& 'https://rest.reserve-online.net' === $value['api_base']
 					&& 'single' === $value['mode']
-					&& 'DEMO' === $value['default_property'];
+					&& '' === $value['default_property'];
 			} ) )
 			->andReturn( true );
 
@@ -36,7 +36,7 @@ final class ActivationTest extends WH_UnitTestCase {
 		// Existing values win; untouched keys still get defaults.
 		$this->assertSame( 'alice', $merged['api_user'] );
 		$this->assertSame( 'multi', $merged['mode'] );
-		$this->assertSame( 'DEMO', $merged['default_property'] );
+		$this->assertSame( '', $merged['default_property'] );
 		$this->assertSame( 1800, $merged['cache_ttl_content'] );
 	}
 

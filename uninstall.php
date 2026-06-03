@@ -11,6 +11,10 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 delete_option( 'wh_settings' );
 
+// Remove the tracking option for auto-created pages. The pages themselves are
+// left in place — they may contain content the site owner wants to keep.
+delete_option( 'wh_pages' );
+
 global $wpdb;
 
 // Remove all wh: transients (and their timeouts) from the options table.

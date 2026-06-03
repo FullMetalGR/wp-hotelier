@@ -35,7 +35,7 @@ class WH_Settings {
 			'api_pass'               => '',
 			'api_base'               => 'https://rest.reserve-online.net',
 			'mode'                   => 'single',
-			'default_property'       => 'DEMO',
+			'default_property'       => '',
 			'currency'               => 'EUR',
 			'locale'                 => '',
 			'completion_mode'        => 'hosted',

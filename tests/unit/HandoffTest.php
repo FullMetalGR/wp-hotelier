@@ -12,7 +12,7 @@ final class HandoffTest extends WH_UnitTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 		Functions\when( 'esc_url_raw' )->returnArg( 1 );
-		$json               = file_get_contents( WH_FIXTURES_DIR . '/availability-demo.json' );
+		$json               = file_get_contents( WH_FIXTURES_DIR . '/availability-sample.json' );
 		$envelope           = json_decode( $json, true );
 		$this->availability = $envelope['data'];
 	}

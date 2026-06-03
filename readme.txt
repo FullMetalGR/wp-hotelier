@@ -1,4 +1,4 @@
-=== WebHotelier for WordPress ===
+=== WP Hotelier ===
 Contributors: adssolutions
 Tags: hotel, booking, reservations, webhotelier, availability
 Requires at least: 6.0
@@ -12,7 +12,7 @@ Wraps the entire WebHotelier Integration REST API: settings, admin dashboards, a
 
 == Description ==
 
-WebHotelier for WordPress is a single, self-contained plugin that integrates the WebHotelier (reserve-online.net) Integration REST API into WordPress.
+WP Hotelier is a single, self-contained plugin that integrates the WebHotelier (reserve-online.net) Integration REST API into WordPress.
 
 * Server-side API client wrapping every documented endpoint (property, availability, offers, bookings, vouchers, statistics) with Basic Auth, caching, i18n, and uniform error handling.
 * Credentials never leave the server: the browser talks only to a nonce-protected proxy.

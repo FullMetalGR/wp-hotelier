@@ -1,8 +1,9 @@
 <?php
 /**
- * Plugin Name:       WebHotelier for WordPress
+ * Plugin Name:       WP Hotelier
  * Plugin URI:        https://github.com/FullMetalGR/wp-hotelier
- * Description:        Wraps the entire WebHotelier Integration REST API: settings, admin dashboards, API explorer, and a full frontend booking flow via shortcodes.
+ * Update URI:        https://github.com/FullMetalGR/wp-hotelier
+ * Description:        Connects WordPress to the WebHotelier booking API: settings, admin dashboards, API explorer, and a full frontend booking flow via shortcodes.
  * Version:           1.0.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
@@ -29,19 +30,15 @@ define( 'WH_BASENAME', plugin_basename( __FILE__ ) );
 require_once WH_PATH . 'includes/class-wh-plugin.php';
 
 /**
- * Run on plugin activation: seed default settings, flush rewrite rules.
+ * Run on plugin activation: seed default settings, create the front-end
+ * pages, and flush rewrite rules.
  *
  * @return void
  */
 function wh_activate() {
 	require_once WH_PATH . 'includes/class-wh-settings.php';
-	$existing = get_option( 'wh_settings', array() );
-	if ( ! is_array( $existing ) ) {
-		$existing = array();
-	}
-	$defaults = WH_Settings::defaults();
-	update_option( 'wh_settings', array_merge( $defaults, $existing ) );
-	flush_rewrite_rules();
+	require_once WH_PATH . 'includes/class-wh-activator.php';
+	WH_Activator::activate();
 }
 register_activation_hook( __FILE__, 'wh_activate' );
 

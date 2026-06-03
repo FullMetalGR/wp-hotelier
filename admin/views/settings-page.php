@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) && ! defined( 'WH_TESTING' ) && ! defined( 'WH_TESTS
 	exit; }
 ?>
 <div class="wrap wh-admin wh-settings">
-	<h1><?php echo esc_html__( 'WebHotelier Settings', 'webhotelier' ); ?></h1>
+	<h1><?php echo esc_html__( 'WP Hotelier Settings', 'webhotelier' ); ?></h1>
 
 	<form method="post" action="options.php">
 		<?php

@@ -101,8 +101,8 @@ class WH_Admin {
 	 */
 	public function register_menu() {
 		$top                   = add_menu_page(
-			__( 'WebHotelier', 'webhotelier' ),
-			__( 'WebHotelier', 'webhotelier' ),
+			__( 'WP Hotelier', 'webhotelier' ),
+			__( 'WP Hotelier', 'webhotelier' ),
 			self::CAP,
 			self::MENU_SLUG,
 			array( $this, 'render_settings' ),

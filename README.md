@@ -1,4 +1,4 @@
-# WebHotelier for WordPress
+# WP Hotelier
 
 [![CI](https://github.com/FullMetalGR/wp-hotelier/actions/workflows/ci.yml/badge.svg)](https://github.com/FullMetalGR/wp-hotelier/actions/workflows/ci.yml)
 
@@ -28,7 +28,7 @@ The frontend handles search, availability and room/rate selection natively, then
 ## Installation
 
 1. Copy this directory into `wp-content/plugins/` (e.g. as `wp-content/plugins/wp-hotelier/`).
-2. Activate **WebHotelier for WordPress** from the Plugins screen.
+2. Activate **WP Hotelier** from the Plugins screen.
 3. Go to **WebHotelier → Settings**, enter your API username, password and property code, choose single- or multi-property mode, and click **Test Connection**.
 
 > Runtime has **no Composer or build dependencies** — the `composer.json` is for development/testing only.

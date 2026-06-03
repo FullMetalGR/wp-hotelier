@@ -172,7 +172,7 @@ class WH_Stats_Page {
 		}
 
 		$range  = $this->resolve_range( $query );
-		$code   = (string) $this->settings->get( 'default_property', 'DEMO' );
+		$code   = (string) $this->settings->get( 'default_property', '' );
 		$params = array(
 			'date_from' => $range['from'],
 			'date_to'   => $range['to'],

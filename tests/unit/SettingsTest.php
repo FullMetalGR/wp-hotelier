@@ -29,7 +29,7 @@ final class SettingsTest extends WH_UnitTestCase {
 		$d = \WH_Settings::defaults();
 		$this->assertSame( 'https://rest.reserve-online.net', $d['api_base'] );
 		$this->assertSame( 'single', $d['mode'] );
-		$this->assertSame( 'DEMO', $d['default_property'] );
+		$this->assertSame( '', $d['default_property'] );
 		$this->assertSame( 'EUR', $d['currency'] );
 		$this->assertSame( 'hosted', $d['completion_mode'] );
 		$this->assertSame( 'redirect', $d['engine_open'] );
@@ -44,7 +44,7 @@ final class SettingsTest extends WH_UnitTestCase {
 		$s = new \WH_Settings();
 		$this->assertSame( 'https://rest.reserve-online.net', $s->api_base() );
 		$this->assertSame( 'single', $s->mode() );
-		$this->assertSame( 'DEMO', $s->default_property() );
+		$this->assertSame( '', $s->default_property() );
 		$this->assertSame( 1800, $s->cache_ttl_content() );
 		$this->assertSame( 60, $s->cache_ttl_availability() );
 		$this->assertFalse( $s->debug() );
