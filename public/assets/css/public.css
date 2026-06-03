@@ -1,0 +1,187 @@
+/* WebHotelier public styles. */
+.wh-btn {
+	display: inline-block;
+	padding: 0.6em 1.2em;
+	background: #1a73e8;
+	color: #fff;
+	text-decoration: none;
+	border: 0;
+	border-radius: 4px;
+	cursor: pointer;
+	font: inherit;
+	line-height: 1.2;
+}
+.wh-btn:hover {
+	background: #1558b0;
+}
+
+.wh-notice {
+	padding: 0.75em 1em;
+	border-radius: 4px;
+	margin: 1em 0;
+}
+.wh-notice--error {
+	background: #fdecea;
+	color: #611a15;
+}
+.wh-notice--success {
+	background: #edf7ed;
+	color: #1e4620;
+}
+.wh-notice--info {
+	background: #e8f0fe;
+	color: #174ea6;
+}
+.wh-empty {
+	color: #666;
+	font-style: italic;
+}
+
+.wh-search-form {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75em;
+	align-items: flex-end;
+}
+.wh-search-form--compact {
+	gap: 0.5em;
+}
+.wh-search-form .wh-field {
+	display: flex;
+	flex-direction: column;
+}
+.wh-search-form label {
+	font-size: 0.8em;
+	margin-bottom: 0.25em;
+}
+
+.wh-availability {
+	display: grid;
+	gap: 1em;
+}
+.wh-availability--cards {
+	grid-template-columns: repeat( auto-fill, minmax( 280px, 1fr ) );
+}
+.wh-rate-card,
+.wh-room-card,
+.wh-offer-card,
+.wh-result-card {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+	overflow: hidden;
+	background: #fff;
+}
+.wh-rate-card__media img,
+.wh-room-card__media img,
+.wh-offer-card__media img,
+.wh-result-card__media img {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+.wh-rate-card__body,
+.wh-room-card__body,
+.wh-offer-card__body {
+	padding: 1em;
+	flex: 1;
+}
+.wh-rate-card__footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1em;
+	border-top: 1px solid #f0f0f0;
+}
+.wh-rate-card__price,
+.wh-bar__price,
+.wh-price-from {
+	font-weight: 700;
+}
+
+.wh-rooms {
+	display: grid;
+	gap: 1em;
+}
+.wh-rooms--cols-2 {
+	grid-template-columns: repeat( 2, 1fr );
+}
+.wh-rooms--cols-3 {
+	grid-template-columns: repeat( 3, 1fr );
+}
+.wh-rooms--cols-4 {
+	grid-template-columns: repeat( 4, 1fr );
+}
+
+.wh-gallery {
+	position: relative;
+}
+.wh-gallery__track {
+	display: flex;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+}
+.wh-gallery__slide {
+	flex: 0 0 100%;
+	scroll-snap-align: start;
+}
+.wh-gallery__slide img {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+.wh-gallery__nav {
+	position: absolute;
+	top: 50%;
+	transform: translateY( -50% );
+	background: rgba( 0, 0, 0, 0.4 );
+	color: #fff;
+	border: 0;
+	font-size: 1.5em;
+	padding: 0.2em 0.5em;
+	cursor: pointer;
+}
+.wh-gallery__prev {
+	left: 0.5em;
+}
+.wh-gallery__next {
+	right: 0.5em;
+}
+
+.wh-calendar__grid {
+	display: grid;
+	grid-template-columns: repeat( 7, 1fr );
+	gap: 2px;
+}
+.wh-calendar__day {
+	padding: 0.4em;
+	text-align: center;
+	border: 1px solid #eee;
+	font-size: 0.8em;
+}
+.wh-calendar__day--unavailable {
+	opacity: 0.4;
+}
+
+.wh-booking-flow {
+	margin: 1.5em 0;
+}
+.wh-flow-review__summary {
+	list-style: none;
+	padding: 0;
+}
+.wh-flow-confirmation {
+	padding: 1.5em;
+	border: 1px solid #c8e6c9;
+	border-radius: 8px;
+	background: #f1f8f1;
+}
+
+.wh-map {
+	width: 100%;
+}
+.wh-booking-engine__frame,
+.wh-flow-complete__frame {
+	display: block;
+}
