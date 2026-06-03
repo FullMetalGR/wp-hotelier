@@ -1,0 +1,12 @@
+# Secrets — never commit
+.wh-credentials
+.env
+
+# Dependencies & build output
+/vendor/
+/node_modules/
+composer.lock
+
+# PHPUnit
+.phpunit.result.cache
+.phpunit.cache/
