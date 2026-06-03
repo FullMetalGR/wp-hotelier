@@ -210,8 +210,8 @@ class WH_Settings {
 			: $current['api_base'];
 
 		// Password keep-current: blank means "keep existing".
-		$submitted_pass    = isset( $input['api_pass'] ) ? (string) $input['api_pass'] : '';
-		$out['api_pass']   = '' === trim( $submitted_pass ) ? $current['api_pass'] : $submitted_pass;
+		$submitted_pass  = isset( $input['api_pass'] ) ? (string) $input['api_pass'] : '';
+		$out['api_pass'] = '' === trim( $submitted_pass ) ? $current['api_pass'] : $submitted_pass;
 
 		// Enums.
 		foreach ( $enums as $key => $allowed ) {

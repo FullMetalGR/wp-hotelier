@@ -68,7 +68,7 @@ class WH_Sync_PageTest extends WH_Admin_TestCase {
 		$this->assertStringNotContainsString( 'No sources.', $html );
 		// Push/ping tool present.
 		$this->assertStringContainsString( 'wh_action', $html );
-		$this->assertStringContainsString( 'pushPing', $html );
+		$this->assertStringContainsString( 'push_ping', $html );
 	}
 
 	public function test_render_handles_pending_error() {
@@ -87,35 +87,35 @@ class WH_Sync_PageTest extends WH_Admin_TestCase {
 
 	public function test_action_rejects_bad_nonce() {
 		$bookings = Mockery::mock( 'WH_Bookings_API' );
-		$bookings->shouldReceive( 'markSynced' )->never();
+		$bookings->shouldReceive( 'mark_synced' )->never();
 		$page = $this->make_page( $bookings );
 		$this->stub_capability( true );
 		$this->stub_nonce_valid( false );
 
 		$this->expectException( WH_SY_Halt::class );
-		$page->handle_action( array( 'wh_action' => 'markSynced', 'res_id' => 'P1', '_wpnonce' => 'x' ) );
+		$page->handle_action( array( 'wh_action' => 'mark_synced', 'res_id' => 'P1', '_wpnonce' => 'x' ) );
 	}
 
 	public function test_action_rejects_without_capability() {
 		$bookings = Mockery::mock( 'WH_Bookings_API' );
-		$bookings->shouldReceive( 'markSynced' )->never();
+		$bookings->shouldReceive( 'mark_synced' )->never();
 		$page = $this->make_page( $bookings );
 		$this->stub_capability( false );
 		$this->stub_nonce_valid( true );
 
 		$this->expectException( WH_SY_Halt::class );
-		$page->handle_action( array( 'wh_action' => 'markSynced', 'res_id' => 'P1', '_wpnonce' => 'x' ) );
+		$page->handle_action( array( 'wh_action' => 'mark_synced', 'res_id' => 'P1', '_wpnonce' => 'x' ) );
 	}
 
 	public function test_mark_synced_calls_api() {
 		$bookings = Mockery::mock( 'WH_Bookings_API' );
-		$bookings->shouldReceive( 'markSynced' )->once()->with( 'P1' )->andReturn( array( 'synced' => true ) );
+		$bookings->shouldReceive( 'mark_synced' )->once()->with( 'P1' )->andReturn( array( 'synced' => true ) );
 		$page = $this->make_page( $bookings );
 		$this->stub_capability( true );
 		$this->stub_nonce_valid( true );
 
 		try {
-			$page->handle_action( array( 'wh_action' => 'markSynced', 'res_id' => 'P1', '_wpnonce' => 'x' ) );
+			$page->handle_action( array( 'wh_action' => 'mark_synced', 'res_id' => 'P1', '_wpnonce' => 'x' ) );
 			$this->fail( 'expected redirect' );
 		} catch ( WH_SY_Halt $e ) {
 			$this->assertStringContainsString( 'wh_notice=sync_ok', $e->data );
@@ -124,7 +124,7 @@ class WH_Sync_PageTest extends WH_Admin_TestCase {
 
 	public function test_push_ping_calls_api_with_params() {
 		$bookings = Mockery::mock( 'WH_Bookings_API' );
-		$bookings->shouldReceive( 'pushPing' )
+		$bookings->shouldReceive( 'push_ping' )
 			->once()
 			->with( Mockery::on( function ( $p ) { return isset( $p['res_id'] ) && 'P1' === $p['res_id']; } ) )
 			->andReturn( array( 'ping' => 'ok' ) );
@@ -133,7 +133,7 @@ class WH_Sync_PageTest extends WH_Admin_TestCase {
 		$this->stub_nonce_valid( true );
 
 		try {
-			$page->handle_action( array( 'wh_action' => 'pushPing', 'res_id' => 'P1', '_wpnonce' => 'x' ) );
+			$page->handle_action( array( 'wh_action' => 'push_ping', 'res_id' => 'P1', '_wpnonce' => 'x' ) );
 			$this->fail( 'expected redirect' );
 		} catch ( WH_SY_Halt $e ) {
 			$this->assertStringContainsString( 'wh_notice=ping_ok', $e->data );
@@ -142,13 +142,13 @@ class WH_Sync_PageTest extends WH_Admin_TestCase {
 
 	public function test_action_error_redirects_with_error() {
 		$bookings = Mockery::mock( 'WH_Bookings_API' );
-		$bookings->shouldReceive( 'markSynced' )->once()->andReturn( new \WP_Error( 'NOT_FOUND', 'Missing.' ) );
+		$bookings->shouldReceive( 'mark_synced' )->once()->andReturn( new \WP_Error( 'NOT_FOUND', 'Missing.' ) );
 		$page = $this->make_page( $bookings );
 		$this->stub_capability( true );
 		$this->stub_nonce_valid( true );
 
 		try {
-			$page->handle_action( array( 'wh_action' => 'markSynced', 'res_id' => 'P1', '_wpnonce' => 'x' ) );
+			$page->handle_action( array( 'wh_action' => 'mark_synced', 'res_id' => 'P1', '_wpnonce' => 'x' ) );
 			$this->fail( 'expected redirect' );
 		} catch ( WH_SY_Halt $e ) {
 			$this->assertStringContainsString( 'wh_notice=error', $e->data );

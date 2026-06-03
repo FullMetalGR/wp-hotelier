@@ -10,17 +10,23 @@ if ( ! defined( 'ABSPATH' ) && ! defined( 'WH_TESTING' ) && ! defined( 'WH_TESTS
 	exit;
 }
 
+/**
+ * Admin Sync screen: pending bookings, mark-synced, push/ping tool, and booking-sources viewer.
+ */
 class WH_Sync_Page {
 
 	const CAP   = 'manage_options';
 	const NONCE = 'wh_sync_action';
 
 	/** Allowed sync actions. */
-	const ACTIONS = array( 'markSynced', 'pushPing' );
+	const ACTIONS = array( 'mark_synced', 'push_ping' );
 
 	/** @var WH_Bookings_API */
 	protected $bookings;
 
+	/**
+	 * Constructor. Injects the bookings API.
+	 */
 	public function __construct( $bookings ) {
 		$this->bookings = $bookings;
 	}
@@ -86,8 +92,8 @@ class WH_Sync_Page {
 		foreach ( $prows as $p ) {
 			$rid = isset( $p['res_id'] ) ? (string) $p['res_id'] : '';
 			echo '<tr><td>' . esc_html( $rid ) . '</td><td>' . esc_html( (string) ( $p['lastName'] ?? '' ) ) . '</td><td>' . esc_html( (string) ( $p['checkin'] ?? '' ) ) . '</td><td>';
-			echo $this->action_form( $action, $nonce, 'markSynced', $rid, __( 'Mark synced', 'webhotelier' ) );
-			echo $this->action_form( $action, $nonce, 'pushPing', $rid, __( 'Push / ping', 'webhotelier' ) );
+			echo $this->action_form( $action, $nonce, 'mark_synced', $rid, __( 'Mark synced', 'webhotelier' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- action_form() returns markup escaped with esc_url/esc_attr/esc_html.
+			echo $this->action_form( $action, $nonce, 'push_ping', $rid, __( 'Push / ping', 'webhotelier' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- action_form() returns markup escaped with esc_url/esc_attr/esc_html.
 			echo '</td></tr>';
 		}
 		echo '</tbody></table>';
@@ -96,7 +102,7 @@ class WH_Sync_Page {
 		echo '<h2>' . esc_html__( 'Push / ping tool', 'webhotelier' ) . '</h2>';
 		echo '<form method="post" action="' . esc_url( $action ) . '">';
 		echo '<input type="hidden" name="action" value="wh_sync_action" />';
-		echo '<input type="hidden" name="wh_action" value="pushPing" />';
+		echo '<input type="hidden" name="wh_action" value="push_ping" />';
 		echo '<input type="hidden" name="_wpnonce" value="' . esc_attr( $nonce ) . '" />';
 		echo '<label>' . esc_html__( 'Reservation ID', 'webhotelier' ) . ' <input type="text" name="res_id" /></label> ';
 		echo '<button class="button">' . esc_html__( 'Send push/ping', 'webhotelier' ) . '</button>';
@@ -119,9 +125,9 @@ class WH_Sync_Page {
 			if ( ! is_array( $s ) ) {
 				continue;
 			}
-			$is_channel = ! empty( $s['is_channel'] ) ? esc_html__( 'Yes', 'webhotelier' ) : esc_html__( 'No', 'webhotelier' );
-			$is_public  = ! empty( $s['is_public'] ) ? esc_html__( 'Yes', 'webhotelier' ) : esc_html__( 'No', 'webhotelier' );
-			echo '<tr><td>' . esc_html( (string) ( $s['id'] ?? '' ) ) . '</td><td>' . esc_html( (string) ( $s['name'] ?? '' ) ) . '</td><td>' . $is_channel . '</td><td>' . $is_public . '</td></tr>';
+			$is_channel = ! empty( $s['is_channel'] ) ? __( 'Yes', 'webhotelier' ) : __( 'No', 'webhotelier' );
+			$is_public  = ! empty( $s['is_public'] ) ? __( 'Yes', 'webhotelier' ) : __( 'No', 'webhotelier' );
+			echo '<tr><td>' . esc_html( (string) ( $s['id'] ?? '' ) ) . '</td><td>' . esc_html( (string) ( $s['name'] ?? '' ) ) . '</td><td>' . esc_html( $is_channel ) . '</td><td>' . esc_html( $is_public ) . '</td></tr>';
 		}
 		echo '</tbody></table></div>';
 	}
@@ -163,13 +169,13 @@ class WH_Sync_Page {
 		$result = null;
 
 		switch ( $act ) {
-			case 'markSynced':
-				$result = $this->bookings->markSynced( $res_id );
+			case 'mark_synced':
+				$result = $this->bookings->mark_synced( $res_id );
 				$notice = is_wp_error( $result ) ? 'error' : 'sync_ok';
 				break;
 
-			case 'pushPing':
-				$result = $this->bookings->pushPing( array( 'res_id' => $res_id ) );
+			case 'push_ping':
+				$result = $this->bookings->push_ping( array( 'res_id' => $res_id ) );
 				$notice = is_wp_error( $result ) ? 'error' : 'ping_ok';
 				break;
 

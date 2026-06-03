@@ -7,6 +7,9 @@
 
 defined( 'ABSPATH' ) || defined( 'WH_PATH' ) || defined( 'WH_TESTS_DIR' ) || exit;
 
+/**
+ * Public-layer bootstrapper: wires the REST proxy, shortcodes, and front-end asset hooks.
+ */
 class WH_Public {
 
 	/** @var WH_Settings|null */

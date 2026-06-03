@@ -76,13 +76,13 @@ class WH_Bookings_ActionTest extends WH_Admin_TestCase {
 
 	public function test_confirmation_email_calls_api() {
 		$bookings = Mockery::mock( 'WH_Bookings_API' );
-		$bookings->shouldReceive( 'confirmationEmail' )->once()->with( array( 'res_id' => 'R1' ) )->andReturn( array( 'sent' => true ) );
+		$bookings->shouldReceive( 'confirmation_email' )->once()->with( array( 'res_id' => 'R1' ) )->andReturn( array( 'sent' => true ) );
 		$page = $this->make_page( $bookings );
 		$this->stub_capability( true );
 		$this->stub_nonce_valid( true );
 
 		try {
-			$page->handle_action( array( 'wh_action' => 'confirmationEmail', 'res_id' => 'R1', '_wpnonce' => 'x' ) );
+			$page->handle_action( array( 'wh_action' => 'confirmation_email', 'res_id' => 'R1', '_wpnonce' => 'x' ) );
 			$this->fail( 'expected redirect' );
 		} catch ( WH_BA_Halt $e ) {
 			$this->assertStringContainsString( 'wh_notice=email_ok', $e->data );
@@ -91,13 +91,13 @@ class WH_Bookings_ActionTest extends WH_Admin_TestCase {
 
 	public function test_mark_synced_calls_api() {
 		$bookings = Mockery::mock( 'WH_Bookings_API' );
-		$bookings->shouldReceive( 'markSynced' )->once()->with( 'R1' )->andReturn( array( 'synced' => true ) );
+		$bookings->shouldReceive( 'mark_synced' )->once()->with( 'R1' )->andReturn( array( 'synced' => true ) );
 		$page = $this->make_page( $bookings );
 		$this->stub_capability( true );
 		$this->stub_nonce_valid( true );
 
 		try {
-			$page->handle_action( array( 'wh_action' => 'markSynced', 'res_id' => 'R1', '_wpnonce' => 'x' ) );
+			$page->handle_action( array( 'wh_action' => 'mark_synced', 'res_id' => 'R1', '_wpnonce' => 'x' ) );
 			$this->fail( 'expected redirect' );
 		} catch ( WH_BA_Halt $e ) {
 			$this->assertStringContainsString( 'wh_notice=sync_ok', $e->data );

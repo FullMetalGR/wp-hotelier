@@ -11,6 +11,9 @@
 
 defined( 'ABSPATH' ) || defined( 'WH_PATH' ) || defined( 'WH_TESTS_DIR' ) || exit;
 
+/**
+ * Nonce-protected REST proxy: the only bridge the browser uses to reach credentialed WebHotelier calls.
+ */
 class WH_Proxy {
 
 	const NS = 'webhotelier/v1';
@@ -141,8 +144,10 @@ class WH_Proxy {
 		);
 	}
 
-	/* ----------------------------------------------------------------- */
-	/* Permission callbacks                                              */
+	/*
+	----------------------------------------------------------------- */
+	/*
+	Permission callbacks                                              */
 	/* ----------------------------------------------------------------- */
 
 	/**
@@ -169,8 +174,10 @@ class WH_Proxy {
 		return (bool) current_user_can( 'manage_options' );
 	}
 
-	/* ----------------------------------------------------------------- */
-	/* Route: availability                                              */
+	/*
+	----------------------------------------------------------------- */
+	/*
+	Route: availability                                              */
 	/* ----------------------------------------------------------------- */
 
 	/**
@@ -196,8 +203,10 @@ class WH_Proxy {
 		return $this->respond( $result );
 	}
 
-	/* ----------------------------------------------------------------- */
-	/* Route: property / rooms / room / rates                            */
+	/*
+	----------------------------------------------------------------- */
+	/*
+	Route: property / rooms / room / rates                            */
 	/* ----------------------------------------------------------------- */
 
 	/**
@@ -252,8 +261,10 @@ class WH_Proxy {
 		return $this->respond( $this->property_api()->rates( $code, $room ) );
 	}
 
-	/* ----------------------------------------------------------------- */
-	/* Route: offers                                                     */
+	/*
+	----------------------------------------------------------------- */
+	/*
+	Route: offers                                                     */
 	/* ----------------------------------------------------------------- */
 
 	/**
@@ -272,8 +283,10 @@ class WH_Proxy {
 		return $this->respond( $this->offers_api()->single( $code, $params ) );
 	}
 
-	/* ----------------------------------------------------------------- */
-	/* Route: calendar / bar / extras                                    */
+	/*
+	----------------------------------------------------------------- */
+	/*
+	Route: calendar / bar / extras                                    */
 	/* ----------------------------------------------------------------- */
 
 	/**
@@ -351,7 +364,7 @@ class WH_Proxy {
 		if ( $months > 3 ) {
 			$months = 3;
 		}
-		$ts  = strtotime( $start );
+		$ts = strtotime( $start );
 		if ( false === $ts ) {
 			$start = gmdate( 'Y-m-d' );
 			$ts    = strtotime( $start );
@@ -417,8 +430,10 @@ class WH_Proxy {
 		return $this->respond( $this->availability_api()->extras( $code, $rate, $params ) );
 	}
 
-	/* ----------------------------------------------------------------- */
-	/* Route: book (native non-card only)                                */
+	/*
+	----------------------------------------------------------------- */
+	/*
+	Route: book (native non-card only)                                */
 	/* ----------------------------------------------------------------- */
 
 	/** Card-related field names that are never allowed through the proxy. */
@@ -537,8 +552,10 @@ class WH_Proxy {
 		return $out;
 	}
 
-	/* ----------------------------------------------------------------- */
-	/* Route: lookup (anti-enumeration)                                  */
+	/*
+	----------------------------------------------------------------- */
+	/*
+	Route: lookup (anti-enumeration)                                  */
 	/* ----------------------------------------------------------------- */
 
 	/**
@@ -592,17 +609,19 @@ class WH_Proxy {
 			}
 		}
 
-		if ( '' !== $email && $rec_email === strtolower( trim( $email ) ) ) {
+		if ( '' !== $email && strtolower( trim( $email ) ) === $rec_email ) {
 			return true;
 		}
-		if ( '' !== $last_name && '' !== $rec_last && $rec_last === strtolower( trim( $last_name ) ) ) {
+		if ( '' !== $last_name && '' !== $rec_last && strtolower( trim( $last_name ) ) === $rec_last ) {
 			return true;
 		}
 		return false;
 	}
 
-	/* ----------------------------------------------------------------- */
-	/* Shared helpers                                                    */
+	/*
+	----------------------------------------------------------------- */
+	/*
+	Shared helpers                                                    */
 	/* ----------------------------------------------------------------- */
 
 	/**
@@ -714,8 +733,10 @@ class WH_Proxy {
 		return new WH_Availability_API( WH_Plugin::instance()->client() );
 	}
 
-	/* ----------------------------------------------------------------- */
-	/* API accessors + error factory                                     */
+	/*
+	----------------------------------------------------------------- */
+	/*
+	API accessors + error factory                                     */
 	/* ----------------------------------------------------------------- */
 
 	/**

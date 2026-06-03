@@ -24,6 +24,6 @@ final class VouchersApiTest extends WH_UnitTestCase {
 		$params = array( 'action' => 'disable' );
 		$client = $this->client_expecting_post( '/voucher/42/SECRET10', $params, array( 'updated' => true ) );
 		$api    = new \WH_Vouchers_API( $client );
-		$this->assertSame( array( 'updated' => true ), $api->manageCode( 42, 'SECRET10', $params ) );
+		$this->assertSame( array( 'updated' => true ), $api->manage_code( 42, 'SECRET10', $params ) );
 	}
 }

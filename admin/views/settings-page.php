@@ -5,7 +5,8 @@
  * @package webhotelier
  * @var string $test_nonce
  */
-if ( ! defined( 'ABSPATH' ) && ! defined( 'WH_TESTING' ) && ! defined( 'WH_TESTS_DIR' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) && ! defined( 'WH_TESTING' ) && ! defined( 'WH_TESTS_DIR' ) ) {
+	exit; }
 ?>
 <div class="wrap wh-admin wh-settings">
 	<h1><?php echo esc_html__( 'WebHotelier Settings', 'webhotelier' ); ?></h1>

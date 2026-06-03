@@ -39,21 +39,21 @@ class WH_Bookings_API {
 	/**
 	 * GET /purge/{resId}
 	 *
-	 * @param string $resId Reservation id.
+	 * @param string $res_id Reservation id.
 	 * @return array|WP_Error
 	 */
-	public function purge( $resId ) {
-		return $this->client->get( '/purge/' . rawurlencode( (string) $resId ), array() );
+	public function purge( $res_id ) {
+		return $this->client->get( '/purge/' . rawurlencode( (string) $res_id ), array() );
 	}
 
 	/**
 	 * POST /reservation/cancel/{resId}
 	 *
-	 * @param string $resId Reservation id.
+	 * @param string $res_id Reservation id.
 	 * @return array|WP_Error
 	 */
-	public function cancel( $resId ) {
-		return $this->client->post( '/reservation/cancel/' . rawurlencode( (string) $resId ), array() );
+	public function cancel( $res_id ) {
+		return $this->client->post( '/reservation/cancel/' . rawurlencode( (string) $res_id ), array() );
 	}
 
 	/**
@@ -62,7 +62,7 @@ class WH_Bookings_API {
 	 * @param array $params Params (res_id, email).
 	 * @return array|WP_Error
 	 */
-	public function confirmationEmail( array $params ) {
+	public function confirmation_email( array $params ) {
 		return $this->client->post( '/reservation/confirmation_email', $params );
 	}
 
@@ -79,11 +79,11 @@ class WH_Bookings_API {
 	/**
 	 * GET /reservation/{resId}
 	 *
-	 * @param string $resId Reservation id.
+	 * @param string $res_id Reservation id.
 	 * @return array|WP_Error
 	 */
-	public function retrieve( $resId ) {
-		return $this->client->get( '/reservation/' . rawurlencode( (string) $resId ), array() );
+	public function retrieve( $res_id ) {
+		return $this->client->get( '/reservation/' . rawurlencode( (string) $res_id ), array() );
 	}
 
 	/**
@@ -98,11 +98,11 @@ class WH_Bookings_API {
 	/**
 	 * GET /reservation/sync/{resId}
 	 *
-	 * @param string $resId Reservation id.
+	 * @param string $res_id Reservation id.
 	 * @return array|WP_Error
 	 */
-	public function markSynced( $resId ) {
-		return $this->client->get( '/reservation/sync/' . rawurlencode( (string) $resId ), array() );
+	public function mark_synced( $res_id ) {
+		return $this->client->get( '/reservation/sync/' . rawurlencode( (string) $res_id ), array() );
 	}
 
 	/**
@@ -111,7 +111,7 @@ class WH_Bookings_API {
 	 * @param array $params Params.
 	 * @return array|WP_Error
 	 */
-	public function pushPing( array $params ) {
+	public function push_ping( array $params ) {
 		return $this->client->post( '/push/ping', $params );
 	}
 

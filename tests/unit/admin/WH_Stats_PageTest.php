@@ -52,13 +52,13 @@ class WH_Stats_PageTest extends WH_Admin_TestCase {
 		} );
 		$stats = Mockery::mock( 'WH_Stats_API' );
 		$stats->shouldReceive( 'summary' )->once()->with( 'DEMO', $has_dates )->andReturn( array( 'revenue' => 12000, 'bookings' => 24, 'roomnights' => 120, 'adr' => 100 ) );
-		$stats->shouldReceive( 'perDay' )->once()->with( 'DEMO', $has_dates )->andReturn( array(
+		$stats->shouldReceive( 'per_day' )->once()->with( 'DEMO', $has_dates )->andReturn( array(
 			'data' => array(
 				array( 'date' => '2026-08-01', 'revenue' => 100 ),
 				array( 'date' => '2026-08-02', 'revenue' => 250 ),
 			),
 		) );
-		$stats->shouldReceive( 'perCountry' )->once()->with( 'DEMO', $has_dates )->andReturn( array(
+		$stats->shouldReceive( 'per_country' )->once()->with( 'DEMO', $has_dates )->andReturn( array(
 			'data' => array(
 				array( 'country' => 'GB', 'revenue' => 800 ),
 				array( 'country' => 'DE', 'revenue' => 400 ),
@@ -81,8 +81,8 @@ class WH_Stats_PageTest extends WH_Admin_TestCase {
 	public function test_render_shows_error_on_summary_failure() {
 		$stats = Mockery::mock( 'WH_Stats_API' );
 		$stats->shouldReceive( 'summary' )->once()->andReturn( new \WP_Error( 'NOT_ALLOWED', 'No stats access.' ) );
-		$stats->shouldReceive( 'perDay' )->andReturn( array( 'data' => array() ) );
-		$stats->shouldReceive( 'perCountry' )->andReturn( array( 'data' => array() ) );
+		$stats->shouldReceive( 'per_day' )->andReturn( array( 'data' => array() ) );
+		$stats->shouldReceive( 'per_country' )->andReturn( array( 'data' => array() ) );
 
 		$page = $this->make_page( $stats );
 		$this->stub_capability( true );

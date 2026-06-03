@@ -9,6 +9,9 @@ if ( ! defined( 'ABSPATH' ) && ! defined( 'WH_TESTING' ) && ! defined( 'WH_TESTS
 	exit;
 }
 
+/**
+ * Admin Bookings screen: search, view, cancel, resend confirmation, and mark bookings synced.
+ */
 class WH_Bookings_Page {
 
 	const CAP   = 'manage_options';
@@ -20,6 +23,9 @@ class WH_Bookings_Page {
 	/** @var WH_Bookings_API */
 	protected $bookings;
 
+	/**
+	 * Constructor. Injects the bookings API.
+	 */
 	public function __construct( $bookings ) {
 		$this->bookings = $bookings;
 	}
@@ -76,11 +82,11 @@ class WH_Bookings_Page {
 			$query = isset( $_GET ) ? wp_unslash( $_GET ) : array();
 		}
 
-		$res_id   = ! empty( $query['res_id'] ) ? sanitize_text_field( (string) $query['res_id'] ) : '';
-		$filters  = $this->build_filters( $query );
-		$detail   = null;
-		$results  = null;
-		$error    = '';
+		$res_id  = ! empty( $query['res_id'] ) ? sanitize_text_field( (string) $query['res_id'] ) : '';
+		$filters = $this->build_filters( $query );
+		$detail  = null;
+		$results = null;
+		$error   = '';
 
 		if ( '' !== $res_id ) {
 			$detail = $this->bookings->retrieve( $res_id );
@@ -146,8 +152,14 @@ class WH_Bookings_Page {
 			echo '<tr><td colspan="7">' . esc_html__( 'No reservations found.', 'webhotelier' ) . '</td></tr>';
 		}
 		foreach ( $rows as $r ) {
-			$rid     = isset( $r['res_id'] ) ? (string) $r['res_id'] : '';
-			$detail_url = add_query_arg( array( 'page' => 'webhotelier-bookings', 'res_id' => $rid ), admin_url( 'admin.php' ) );
+			$rid        = isset( $r['res_id'] ) ? (string) $r['res_id'] : '';
+			$detail_url = add_query_arg(
+				array(
+					'page'   => 'webhotelier-bookings',
+					'res_id' => $rid,
+				),
+				admin_url( 'admin.php' )
+			);
 			printf(
 				'<tr><td><a href="%s">%s</a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s %s</td><td><a class="button button-small" href="%1$s">%s</a></td></tr>',
 				esc_url( $detail_url ),
@@ -197,8 +209,8 @@ class WH_Bookings_Page {
 
 		// Guarded action buttons (each is a separate admin-post form).
 		$this->action_button( $action, $nonce, $rid, 'cancel', __( 'Cancel reservation', 'webhotelier' ), true );
-		$this->action_button( $action, $nonce, $rid, 'confirmationEmail', __( 'Resend confirmation email', 'webhotelier' ), false );
-		$this->action_button( $action, $nonce, $rid, 'markSynced', __( 'Mark synced', 'webhotelier' ), false );
+		$this->action_button( $action, $nonce, $rid, 'confirmation_email', __( 'Resend confirmation email', 'webhotelier' ), false );
+		$this->action_button( $action, $nonce, $rid, 'mark_synced', __( 'Mark synced', 'webhotelier' ), false );
 		$this->purge_button( $action, $nonce, $rid );
 	}
 
@@ -259,13 +271,13 @@ class WH_Bookings_Page {
 				$notice = is_wp_error( $result ) ? 'error' : 'cancel_ok';
 				break;
 
-			case 'confirmationEmail':
-				$result = $this->bookings->confirmationEmail( array( 'res_id' => $res_id ) );
+			case 'confirmation_email':
+				$result = $this->bookings->confirmation_email( array( 'res_id' => $res_id ) );
 				$notice = is_wp_error( $result ) ? 'error' : 'email_ok';
 				break;
 
-			case 'markSynced':
-				$result = $this->bookings->markSynced( $res_id );
+			case 'mark_synced':
+				$result = $this->bookings->mark_synced( $res_id );
 				$notice = is_wp_error( $result ) ? 'error' : 'sync_ok';
 				break;
 

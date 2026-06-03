@@ -7,6 +7,9 @@
 
 defined( 'ABSPATH' ) || defined( 'WH_PATH' ) || defined( 'WH_TESTS_DIR' ) || exit;
 
+/**
+ * Registers every wh_* shortcode and dispatches each to its renderer.
+ */
 class WH_Shortcodes {
 
 	/** @var WH_Settings|null */
@@ -91,8 +94,10 @@ class WH_Shortcodes {
 		return $merged;
 	}
 
-	/* ----------------------------------------------------------------- */
-	/* Accessors                                                         */
+	/*
+	----------------------------------------------------------------- */
+	/*
+	Accessors                                                         */
 	/* ----------------------------------------------------------------- */
 
 	/** @return WH_Settings */
@@ -145,8 +150,10 @@ class WH_Shortcodes {
 		return WH_Render::error( $error );
 	}
 
-	/* ----------------------------------------------------------------- */
-	/* Renderer stubs (filled by later tasks)                            */
+	/*
+	----------------------------------------------------------------- */
+	/*
+	Renderer stubs (filled by later tasks)                            */
 	/* ----------------------------------------------------------------- */
 
 	/**
@@ -227,7 +234,7 @@ class WH_Shortcodes {
 		// Read query state; sanitize the keys we use.
 		$query = array();
 		$keys  = array( 'wh_step', 'wh_nonce', 'checkin', 'checkout', 'adults', 'children', 'rooms', 'property', 'room', 'rate', 'voucher', 'price', 'payment_method', 'firstname', 'lastname', 'email', 'phone', 'country', 'remarks' );
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only step routing; transitions re-check nonce in WH_Booking_Flow.
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Missing -- read-only step routing; values are sanitized below and state-changing transitions re-verify the nonce in WH_Booking_Flow.
 		$source = array_merge( $_GET, $_POST );
 		foreach ( $keys as $k ) {
 			if ( isset( $source[ $k ] ) ) {
@@ -546,13 +553,19 @@ class WH_Shortcodes {
 		);
 
 		$params = $this->availability_params_from_atts(
-			array_merge( $a, array( 'checkout' => '', 'voucher' => '' ) )
+			array_merge(
+				$a,
+				array(
+					'checkout' => '',
+					'voucher'  => '',
+				)
+			)
 		);
 		if ( '' !== $a['room'] ) {
 			$params['room'] = $a['room'];
 		}
 
-		$data = $this->availability_api()->flexibleCalendar( $a['property'], $params );
+		$data = $this->availability_api()->flexible_calendar( $a['property'], $params );
 		if ( is_wp_error( $data ) ) {
 			return $this->render_error( $data );
 		}

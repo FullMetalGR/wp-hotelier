@@ -9,6 +9,9 @@ if ( ! defined( 'ABSPATH' ) && ! defined( 'WH_TESTING' ) && ! defined( 'WH_TESTS
 	exit;
 }
 
+/**
+ * Admin 'API Explorer' screen: builds a form from the endpoint registry and runs requests.
+ */
 class WH_Explorer_Page {
 
 	const CAP   = 'manage_options';
@@ -19,6 +22,9 @@ class WH_Explorer_Page {
 	/** @var WH_Client */
 	protected $client;
 
+	/**
+	 * Constructor. Injects the endpoint registry and the API client.
+	 */
 	public function __construct( $endpoints, $client ) {
 		$this->endpoints = $endpoints;
 		$this->client    = $client;
@@ -38,7 +44,7 @@ class WH_Explorer_Page {
 		// Group by category for the optgroup picker.
 		$grouped = array();
 		foreach ( $all as $ep ) {
-			$cat = isset( $ep['category'] ) ? (string) $ep['category'] : 'Other';
+			$cat               = isset( $ep['category'] ) ? (string) $ep['category'] : 'Other';
 			$grouped[ $cat ][] = $ep;
 		}
 
@@ -101,8 +107,10 @@ class WH_Explorer_Page {
 		echo '<div id="wh-explorer-meta" class="wh-explorer-meta" aria-live="polite"></div>';
 		echo '<pre id="wh-explorer-output" class="wh-explorer-output" aria-live="polite"></pre>';
 
-		// Embedded registry for the JS form builder.
-		echo '<script type="application/json" id="wh-explorer-registry">' . $registry_json . '</script>';
+		// Embedded registry for the JS form builder. $registry_json is wp_json_encode()
+		// of the internal endpoint registry (no user input; slashes are escaped, so it
+		// cannot break out of the script element).
+		echo '<script type="application/json" id="wh-explorer-registry">' . $registry_json . '</script>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON of the internal registry; see note above.
 
 		echo '</div>';
 	}
@@ -151,14 +159,17 @@ class WH_Explorer_Page {
 		$ms     = (int) round( ( microtime( true ) - $start ) * 1000 );
 
 		if ( is_wp_error( $result ) ) {
-			wp_send_json_error( array(
-				'method'     => $method,
-				'url'        => $path,
-				'ms'         => $ms,
-				'error_code' => $result->get_error_code(),
-				'error_msg'  => $result->get_error_message(),
-				'message'    => $result->get_error_message(),
-			), 200 );
+			wp_send_json_error(
+				array(
+					'method'     => $method,
+					'url'        => $path,
+					'ms'         => $ms,
+					'error_code' => $result->get_error_code(),
+					'error_msg'  => $result->get_error_message(),
+					'message'    => $result->get_error_message(),
+				),
+				200
+			);
 		}
 
 		$json = wp_json_encode( $result, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
@@ -166,12 +177,14 @@ class WH_Explorer_Page {
 			$json = '';
 		}
 
-		wp_send_json_success( array(
-			'method' => $method,
-			'url'    => $path,
-			'ms'     => $ms,
-			'json'   => $json,
-		) );
+		wp_send_json_success(
+			array(
+				'method' => $method,
+				'url'    => $path,
+				'ms'     => $ms,
+				'json'   => $json,
+			)
+		);
 	}
 
 	/**

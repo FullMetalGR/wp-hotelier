@@ -1,6 +1,6 @@
 <?php
 /**
- * Statistics screen: summary/perDay/perCountry with date-range + inline-SVG charts.
+ * Statistics screen: summary/per_day/per_country with date-range + inline-SVG charts.
  *
  * @package webhotelier
  */
@@ -13,6 +13,9 @@ if ( ! defined( 'DAY_IN_SECONDS' ) ) {
 	define( 'DAY_IN_SECONDS', 86400 );
 }
 
+/**
+ * Admin Statistics screen: summary, per-day and per-country figures rendered as inline-SVG charts.
+ */
 class WH_Stats_Page {
 
 	const CAP = 'manage_options';
@@ -22,6 +25,9 @@ class WH_Stats_Page {
 	/** @var WH_Settings */
 	protected $settings;
 
+	/**
+	 * Constructor. Injects the stats API and the settings store.
+	 */
 	public function __construct( $stats, $settings ) {
 		$this->stats    = $stats;
 		$this->settings = $settings;
@@ -55,9 +61,9 @@ class WH_Stats_Page {
 			$max = 1; // avoid division by zero; flat zero bars.
 		}
 
-		$n         = count( $series );
-		$gap       = 6;
-		$bar_w     = max( 1, ( $plot_w - ( $gap * ( $n - 1 ) ) ) / $n );
+		$n     = count( $series );
+		$gap   = 6;
+		$bar_w = max( 1, ( $plot_w - ( $gap * ( $n - 1 ) ) ) / $n );
 
 		$svg  = '<svg class="wh-chart" width="' . esc_attr( (string) $width ) . '" height="' . esc_attr( (string) $height ) . '" viewBox="0 0 ' . esc_attr( (string) $width ) . ' ' . esc_attr( (string) $height ) . '" role="img" aria-label="' . esc_attr( $title ) . '">';
 		$svg .= '<title>' . esc_html( $title ) . '</title>';
@@ -65,23 +71,23 @@ class WH_Stats_Page {
 		$svg .= '<text x="' . esc_attr( (string) $pad_left ) . '" y="16" font-size="13" font-weight="600">' . esc_html( $title ) . '</text>';
 		// Baseline axis.
 		$baseline_y = $pad_top + $plot_h;
-		$svg .= '<line x1="' . esc_attr( (string) $pad_left ) . '" y1="' . esc_attr( (string) $baseline_y ) . '" x2="' . esc_attr( (string) ( $pad_left + $plot_w ) ) . '" y2="' . esc_attr( (string) $baseline_y ) . '" stroke="#c3c4c7" />';
+		$svg       .= '<line x1="' . esc_attr( (string) $pad_left ) . '" y1="' . esc_attr( (string) $baseline_y ) . '" x2="' . esc_attr( (string) ( $pad_left + $plot_w ) ) . '" y2="' . esc_attr( (string) $baseline_y ) . '" stroke="#c3c4c7" />';
 
 		$i = 0;
 		foreach ( $series as $label => $value ) {
-			$v   = (float) $value;
-			$h   = ( $v / $max ) * $plot_h;
-			$x   = $pad_left + ( $i * ( $bar_w + $gap ) );
-			$y   = $pad_top + ( $plot_h - $h );
+			$v = (float) $value;
+			$h = ( $v / $max ) * $plot_h;
+			$x = $pad_left + ( $i * ( $bar_w + $gap ) );
+			$y = $pad_top + ( $plot_h - $h );
 
 			$svg .= '<rect x="' . esc_attr( (string) round( $x, 2 ) ) . '" y="' . esc_attr( (string) round( $y, 2 ) ) . '" width="' . esc_attr( (string) round( $bar_w, 2 ) ) . '" height="' . esc_attr( (string) round( $h, 2 ) ) . '" fill="#2271b1"><title>' . esc_html( (string) $label . ': ' . $value ) . '</title></rect>';
 
 			// X label (rotated for density).
-			$lx = $x + ( $bar_w / 2 );
-			$ly = $baseline_y + 12;
+			$lx   = $x + ( $bar_w / 2 );
+			$ly   = $baseline_y + 12;
 			$svg .= '<text x="' . esc_attr( (string) round( $lx, 2 ) ) . '" y="' . esc_attr( (string) $ly ) . '" font-size="9" text-anchor="end" transform="rotate(-45 ' . esc_attr( (string) round( $lx, 2 ) ) . ' ' . esc_attr( (string) $ly ) . ')">' . esc_html( (string) $label ) . '</text>';
 
-			$i++;
+			++$i;
 		}
 
 		$svg .= '</svg>';
@@ -108,7 +114,10 @@ class WH_Stats_Page {
 			$to   = $tmp;
 		}
 
-		return array( 'from' => $from, 'to' => $to );
+		return array(
+			'from' => $from,
+			'to'   => $to,
+		);
 	}
 
 	/**
@@ -119,7 +128,7 @@ class WH_Stats_Page {
 	}
 
 	/**
-	 * Extract a label=>value series from a perDay/perCountry response.
+	 * Extract a label=>value series from a per_day/per_country response.
 	 *
 	 * @param mixed  $resp       API data (array with optional 'data').
 	 * @param string $label_key  Field holding the label.
@@ -162,18 +171,27 @@ class WH_Stats_Page {
 			$query = isset( $_GET ) ? wp_unslash( $_GET ) : array(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only.
 		}
 
-		$range = $this->resolve_range( $query );
-		$code  = (string) $this->settings->get( 'default_property', 'DEMO' );
-		$params = array( 'date_from' => $range['from'], 'date_to' => $range['to'] );
+		$range  = $this->resolve_range( $query );
+		$code   = (string) $this->settings->get( 'default_property', 'DEMO' );
+		$params = array(
+			'date_from' => $range['from'],
+			'date_to'   => $range['to'],
+		);
 
 		$summary  = $this->stats->summary( $code, $params );
-		$per_day  = $this->stats->perDay( $code, $params );
-		$per_ctry = $this->stats->perCountry( $code, $params );
+		$per_day  = $this->stats->per_day( $code, $params );
+		$per_ctry = $this->stats->per_country( $code, $params );
 
 		$errors = array();
-		if ( is_wp_error( $summary ) )  { $errors[] = $summary->get_error_message();  $summary  = array(); }
-		if ( is_wp_error( $per_day ) )  { $errors[] = $per_day->get_error_message();  $per_day  = array(); }
-		if ( is_wp_error( $per_ctry ) ) { $errors[] = $per_ctry->get_error_message(); $per_ctry = array(); }
+		if ( is_wp_error( $summary ) ) {
+			$errors[] = $summary->get_error_message();
+			$summary  = array(); }
+		if ( is_wp_error( $per_day ) ) {
+			$errors[] = $per_day->get_error_message();
+			$per_day  = array(); }
+		if ( is_wp_error( $per_ctry ) ) {
+			$errors[] = $per_ctry->get_error_message();
+			$per_ctry = array(); }
 
 		$day_series     = $this->series_from( $per_day, 'date', 'revenue' );
 		$country_series = $this->series_from( $per_ctry, 'country', 'revenue' );
@@ -221,8 +239,8 @@ class WH_Stats_Page {
 		echo '</tbody></table></div>';
 
 		echo '<div class="wh-stats-charts">';
-		echo $day_chart;     // already escaped inside svg_bar_chart
-		echo $country_chart; // already escaped inside svg_bar_chart
+		echo $day_chart;     // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- svg_bar_chart() escapes every dynamic value (esc_attr/esc_html).
+		echo $country_chart; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- svg_bar_chart() escapes every dynamic value (esc_attr/esc_html).
 		echo '</div></div>';
 	}
 }

@@ -31,7 +31,7 @@ final class BookingsApiTest extends WH_UnitTestCase {
 		$params = array( 'res_id' => 'R1', 'email' => 'guest@example.com' );
 		$client = $this->client_expecting_post( '/reservation/confirmation_email', $params, array( 'sent' => true ) );
 		$api    = new \WH_Bookings_API( $client );
-		$this->assertSame( array( 'sent' => true ), $api->confirmationEmail( $params ) );
+		$this->assertSame( array( 'sent' => true ), $api->confirmation_email( $params ) );
 	}
 
 	public function test_search_gets_reservation_with_params(): void {
@@ -56,14 +56,14 @@ final class BookingsApiTest extends WH_UnitTestCase {
 	public function test_mark_synced_gets_reservation_sync_resid(): void {
 		$client = $this->client_expecting_get( '/reservation/sync/R1', array(), array( 'synced' => true ) );
 		$api    = new \WH_Bookings_API( $client );
-		$this->assertSame( array( 'synced' => true ), $api->markSynced( 'R1' ) );
+		$this->assertSame( array( 'synced' => true ), $api->mark_synced( 'R1' ) );
 	}
 
 	public function test_push_ping_posts_params(): void {
 		$params = array( 'channel' => 'booking.com' );
 		$client = $this->client_expecting_post( '/push/ping', $params, array( 'pong' => true ) );
 		$api    = new \WH_Bookings_API( $client );
-		$this->assertSame( array( 'pong' => true ), $api->pushPing( $params ) );
+		$this->assertSame( array( 'pong' => true ), $api->push_ping( $params ) );
 	}
 
 	public function test_sources_gets_sources(): void {

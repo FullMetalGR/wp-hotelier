@@ -91,11 +91,11 @@ class WH_Property_API {
 	 *
 	 * @param string     $code   Property code.
 	 * @param string     $room   Room code.
-	 * @param string|int $rateId Rate id.
+	 * @param string|int $rate_id Rate id.
 	 * @return array|WP_Error
 	 */
-	public function rate( $code, $room, $rateId ) {
-		$path = '/rate/' . rawurlencode( $code ) . '/' . rawurlencode( $room ) . '/' . rawurlencode( (string) $rateId );
+	public function rate( $code, $room, $rate_id ) {
+		$path = '/rate/' . rawurlencode( $code ) . '/' . rawurlencode( $room ) . '/' . rawurlencode( (string) $rate_id );
 		return $this->client->get( $path, array() );
 	}
 

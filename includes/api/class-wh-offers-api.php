@@ -49,11 +49,11 @@ class WH_Offers_API {
 	 * GET /offers/{code}/{offerId}
 	 *
 	 * @param string     $code    Property code.
-	 * @param string|int $offerId Offer id.
+	 * @param string|int $offer_id Offer id.
 	 * @return array|WP_Error
 	 */
-	public function info( $code, $offerId ) {
-		$path = '/offers/' . rawurlencode( $code ) . '/' . rawurlencode( (string) $offerId );
+	public function info( $code, $offer_id ) {
+		$path = '/offers/' . rawurlencode( $code ) . '/' . rawurlencode( (string) $offer_id );
 		return $this->client->get( $path, array() );
 	}
 }

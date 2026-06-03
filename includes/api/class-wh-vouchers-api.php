@@ -36,23 +36,23 @@ class WH_Vouchers_API {
 	/**
 	 * GET /voucher/{bundleId}
 	 *
-	 * @param string|int $bundleId Bundle id.
+	 * @param string|int $bundle_id Bundle id.
 	 * @return array|WP_Error
 	 */
-	public function codes( $bundleId ) {
-		return $this->client->get( '/voucher/' . rawurlencode( (string) $bundleId ), array() );
+	public function codes( $bundle_id ) {
+		return $this->client->get( '/voucher/' . rawurlencode( (string) $bundle_id ), array() );
 	}
 
 	/**
 	 * POST /voucher/{bundleId}/{code}  (create/update/disable).
 	 *
-	 * @param string|int $bundleId Bundle id.
+	 * @param string|int $bundle_id Bundle id.
 	 * @param string     $code     Voucher code.
 	 * @param array      $params   Params (action, value, ...).
 	 * @return array|WP_Error
 	 */
-	public function manageCode( $bundleId, $code, array $params ) {
-		$path = '/voucher/' . rawurlencode( (string) $bundleId ) . '/' . rawurlencode( (string) $code );
+	public function manage_code( $bundle_id, $code, array $params ) {
+		$path = '/voucher/' . rawurlencode( (string) $bundle_id ) . '/' . rawurlencode( (string) $code );
 		return $this->client->post( $path, $params );
 	}
 }

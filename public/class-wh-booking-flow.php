@@ -12,6 +12,9 @@
 
 defined( 'ABSPATH' ) || defined( 'WH_PATH' ) || defined( 'WH_TESTS_DIR' ) || exit;
 
+/**
+ * Booking-flow state machine: search → results → review → complete → confirmation.
+ */
 class WH_Booking_Flow {
 
 	const STEPS        = array( 'search', 'results', 'review', 'complete', 'confirmation' );
@@ -292,10 +295,10 @@ class WH_Booking_Flow {
 		return WH_Render::template(
 			'flow-confirmation',
 			array(
-				'res_id'     => isset( $directive['res_id'] ) ? $directive['res_id'] : '',
-				'summaryUrl' => isset( $directive['summaryUrl'] ) ? $directive['summaryUrl'] : '',
-				'data'       => isset( $directive['data'] ) ? $directive['data'] : array(),
-				'class'      => 'wh-booking-flow__confirmation',
+				'res_id'      => isset( $directive['res_id'] ) ? $directive['res_id'] : '',
+				'summary_url' => isset( $directive['summaryUrl'] ) ? $directive['summaryUrl'] : '',
+				'data'        => isset( $directive['data'] ) ? $directive['data'] : array(),
+				'class'       => 'wh-booking-flow__confirmation',
 			)
 		);
 	}

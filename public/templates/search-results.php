@@ -27,13 +27,14 @@ $wh_single = ! empty( $single );
 			<?php
 		else :
 			foreach ( $wh_rates as $wh_rate ) {
-				echo WH_Render::template( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- self-escaping template.
+				$wh_card = WH_Render::template(
 					'rate-card',
 					array(
 						'rate'     => $wh_rate,
 						'currency' => $wh_curr,
 					)
 				);
+				echo $wh_card; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- rate-card template escapes its own dynamic output.
 			}
 		endif;
 		?>

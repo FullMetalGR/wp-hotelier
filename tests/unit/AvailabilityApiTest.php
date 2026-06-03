@@ -42,7 +42,7 @@ final class AvailabilityApiTest extends WH_UnitTestCase {
 		$params = array( 'month' => '2026-08', 'nights' => 7 );
 		$client = $this->client_expecting_get( '/availability/DEMO/flexible-calendar', $params, array() );
 		$api    = new \WH_Availability_API( $client );
-		$this->assertSame( array(), $api->flexibleCalendar( 'DEMO', $params ) );
+		$this->assertSame( array(), $api->flexible_calendar( 'DEMO', $params ) );
 	}
 
 	public function test_bar_calls_bar_code(): void {

@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<ruleset name="WebHotelier for WordPress">
+	<description>Coding standards for the WebHotelier for WordPress plugin.</description>
+
+	<!-- Directories and files to scan. -->
+	<file>webhotelier.php</file>
+	<file>uninstall.php</file>
+	<file>includes</file>
+	<file>admin</file>
+	<file>public</file>
+
+	<!-- Never scan these. -->
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+	<exclude-pattern>*/tests/*</exclude-pattern>
+	<exclude-pattern>*/assets/*</exclude-pattern>
+
+	<!-- Only sniff PHP. -->
+	<arg name="extensions" value="php"/>
+
+	<!-- Show sniff codes and a progress bar; use colours and parallelism. -->
+	<arg value="sp"/>
+	<arg name="colors"/>
+	<arg name="parallel" value="8"/>
+
+	<!--
+		WordPress-Extra = WordPress-Core (formatting, naming, whitespace) plus the
+		best-practice, security, and static-analysis sniffs. We deliberately do not
+		pull in WordPress-Docs: the code is documented with concise, idiomatic
+		one-line `@var`/`@return` annotations, and that layer's "every doc comment
+		needs a prose short-description / full param block" rules fight that style
+		without adding value. Documentation completeness is enforced selectively below.
+	-->
+	<rule ref="WordPress-Extra"/>
+
+	<!-- Keep the high-value structural doc checks: classes and functions must be documented. -->
+	<rule ref="Squiz.Commenting.ClassComment.Missing"/>
+	<rule ref="Squiz.Commenting.FunctionComment.Missing"/>
+
+	<!--
+		Justified relaxations. These are opinionated/structural sniffs, not
+		correctness or security checks (every security/correctness finding is
+		fixed in the code, never silenced here).
+	-->
+
+	<!-- "WH"/"wh" is the plugin's established two-letter vendor prefix. -->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals.ShortPrefixPassed">
+		<severity>0</severity>
+	</rule>
+
+	<!-- Shortcode/filter callbacks must keep their fixed signature ($atts, $content); $content is often unused. -->
+	<rule ref="Generic.CodeAnalysis.UnusedFunctionParameter">
+		<severity>0</severity>
+	</rule>
+
+	<!-- $default / $class / $include mirror WordPress core's own parameter names (e.g. get_option's $default). -->
+	<rule ref="Universal.NamingConventions.NoReservedKeywordParameterNames">
+		<severity>0</severity>
+	</rule>
+
+	<!-- The main plugin bootstrap file legitimately mixes procedural setup with class loading. -->
+	<rule ref="Universal.Files.SeparateFunctionsFromOO">
+		<severity>0</severity>
+	</rule>
+
+	<!-- Verify the code actually runs on the PHP versions we advertise. -->
+	<config name="testVersion" value="7.4-"/>
+	<rule ref="PHPCompatibilityWP"/>
+
+	<!-- Targeted WordPress version for deprecation/availability checks. -->
+	<config name="minimum_supported_wp_version" value="6.0"/>
+
+	<!-- Recognise our text domain for i18n checks. -->
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="webhotelier"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Accept our global prefixes (functions, hooks, options, constants). -->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="wh"/>
+				<element value="WH"/>
+			</property>
+		</properties>
+	</rule>
+</ruleset>

@@ -42,7 +42,7 @@ class WH_Stats_API {
 	 * @param array  $params Query params.
 	 * @return array|WP_Error
 	 */
-	public function perDay( $code, array $params ) {
+	public function per_day( $code, array $params ) {
 		return $this->client->get( '/statistics/performance_per_day/' . rawurlencode( $code ), $params );
 	}
 
@@ -53,7 +53,7 @@ class WH_Stats_API {
 	 * @param array  $params Query params.
 	 * @return array|WP_Error
 	 */
-	public function perCountry( $code, array $params ) {
+	public function per_country( $code, array $params ) {
 		return $this->client->get( '/statistics/performance_per_country/' . rawurlencode( $code ), $params );
 	}
 }

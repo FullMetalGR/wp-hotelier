@@ -21,13 +21,14 @@ defined( 'ABSPATH' ) || defined( 'WH_PATH' ) || exit;
 	<?php else : ?>
 		<?php
 		foreach ( $rates as $wh_rate ) {
-			echo WH_Render::template( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- template self-escapes.
+			$wh_card = WH_Render::template(
 				'rate-card',
 				array(
 					'rate'     => $wh_rate,
 					'currency' => $currency,
 				)
 			);
+			echo $wh_card; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- rate-card template escapes its own dynamic output.
 		}
 		?>
 	<?php endif; ?>

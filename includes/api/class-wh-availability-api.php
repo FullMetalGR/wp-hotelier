@@ -74,7 +74,7 @@ class WH_Availability_API {
 	 * @param array  $params Query params.
 	 * @return array|WP_Error
 	 */
-	public function flexibleCalendar( $code, array $params ) {
+	public function flexible_calendar( $code, array $params ) {
 		return $this->client->get( '/availability/' . rawurlencode( $code ) . '/flexible-calendar', $params );
 	}
 
@@ -93,12 +93,12 @@ class WH_Availability_API {
 	 * GET /availability/{code}/extras/{rateId}
 	 *
 	 * @param string     $code   Property code.
-	 * @param string|int $rateId Rate id.
+	 * @param string|int $rate_id Rate id.
 	 * @param array      $params Query params.
 	 * @return array|WP_Error
 	 */
-	public function extras( $code, $rateId, array $params ) {
-		$path = '/availability/' . rawurlencode( $code ) . '/extras/' . rawurlencode( (string) $rateId );
+	public function extras( $code, $rate_id, array $params ) {
+		$path = '/availability/' . rawurlencode( $code ) . '/extras/' . rawurlencode( (string) $rate_id );
 		return $this->client->get( $path, $params );
 	}
 

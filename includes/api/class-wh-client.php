@@ -55,6 +55,7 @@ class WH_Client {
 		$body   = null;
 
 		$headers = array(
+			// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode -- Required to build the HTTP Basic auth header.
 			'Authorization'   => 'Basic ' . base64_encode( $this->settings->api_user() . ':' . $this->settings->api_pass() ),
 			'Accept'          => 'application/json',
 			'Accept-Language' => $this->accept_language(),
@@ -82,7 +83,10 @@ class WH_Client {
 			return new WP_Error(
 				'wh_transport',
 				__( 'The WebHotelier API returned an unreadable response.', 'webhotelier' ),
-				array( 'http_code' => $code, 'raw' => $raw_body )
+				array(
+					'http_code' => $code,
+					'raw'       => $raw_body,
+				)
 			);
 		}
 
@@ -164,7 +168,7 @@ class WH_Client {
 		$pairs = array();
 		foreach ( $args as $key => $value ) {
 			if ( is_array( $value ) ) {
-				$value = json_encode( $value );
+				$value = wp_json_encode( $value );
 			} elseif ( is_bool( $value ) ) {
 				$value = $value ? '1' : '0';
 			}

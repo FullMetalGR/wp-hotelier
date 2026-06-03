@@ -12,7 +12,8 @@
  * @var string     $nonce
  * @var string     $action
  */
-if ( ! defined( 'ABSPATH' ) && ! defined( 'WH_TESTING' ) && ! defined( 'WH_TESTS_DIR' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) && ! defined( 'WH_TESTING' ) && ! defined( 'WH_TESTS_DIR' ) ) {
+	exit; }
 
 // The controller's render_inline() already produces full, escaped markup and is
 // the single source of truth for the table/detail. Reuse it here.

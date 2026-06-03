@@ -10,6 +10,9 @@ if ( ! defined( 'ABSPATH' ) && ! defined( 'WH_TESTING' ) && ! defined( 'WH_TESTS
 	exit;
 }
 
+/**
+ * Admin Settings screen: renders and saves the plugin settings, with a live Test Connection.
+ */
 class WH_Settings_Page {
 
 	const GROUP   = 'wh_settings_group';
@@ -82,6 +85,9 @@ class WH_Settings_Page {
 		);
 	}
 
+	/**
+	 * Constructor. Injects the settings store, the property API, and the current mode.
+	 */
 	public function __construct( $settings, $property, $mode = 'single' ) {
 		$this->settings = $settings;
 		$this->property = $property;
@@ -117,7 +123,10 @@ class WH_Settings_Page {
 				array( $this, 'render_field' ),
 				self::OPTION,
 				self::SECTION,
-				array( 'key' => $key, 'type' => $type )
+				array(
+					'key'  => $key,
+					'type' => $type,
+				)
 			);
 		}
 	}
@@ -135,20 +144,20 @@ class WH_Settings_Page {
 		$out['api_user'] = isset( $input['api_user'] ) ? sanitize_text_field( trim( (string) $input['api_user'] ) ) : '';
 
 		// Password: blank => keep current stored value.
-		$new_pass = isset( $input['api_pass'] ) ? (string) $input['api_pass'] : '';
+		$new_pass        = isset( $input['api_pass'] ) ? (string) $input['api_pass'] : '';
 		$out['api_pass'] = ( '' === trim( $new_pass ) )
 			? (string) $this->settings->get( 'api_pass', '' )
 			: $new_pass;
 
-		$base = isset( $input['api_base'] ) ? esc_url_raw( trim( (string) $input['api_base'] ) ) : '';
+		$base            = isset( $input['api_base'] ) ? esc_url_raw( trim( (string) $input['api_base'] ) ) : '';
 		$out['api_base'] = ( '' !== $base ) ? $base : 'https://rest.reserve-online.net';
 
-		$out['mode']            = $this->enum( $input, 'mode', 'single' );
+		$out['mode']             = $this->enum( $input, 'mode', 'single' );
 		$out['default_property'] = isset( $input['default_property'] ) ? sanitize_text_field( strtoupper( trim( (string) $input['default_property'] ) ) ) : 'DEMO';
-		$out['currency']        = isset( $input['currency'] ) ? strtoupper( sanitize_text_field( trim( (string) $input['currency'] ) ) ) : 'EUR';
-		$out['locale']          = isset( $input['locale'] ) ? sanitize_text_field( trim( (string) $input['locale'] ) ) : '';
-		$out['completion_mode'] = $this->enum( $input, 'completion_mode', 'hosted' );
-		$out['engine_open']     = $this->enum( $input, 'engine_open', 'redirect' );
+		$out['currency']         = isset( $input['currency'] ) ? strtoupper( sanitize_text_field( trim( (string) $input['currency'] ) ) ) : 'EUR';
+		$out['locale']           = isset( $input['locale'] ) ? sanitize_text_field( trim( (string) $input['locale'] ) ) : '';
+		$out['completion_mode']  = $this->enum( $input, 'completion_mode', 'hosted' );
+		$out['engine_open']      = $this->enum( $input, 'engine_open', 'redirect' );
 
 		$out['cache_ttl_content']      = isset( $input['cache_ttl_content'] ) ? max( 0, (int) $input['cache_ttl_content'] ) : 1800;
 		$out['cache_ttl_availability'] = isset( $input['cache_ttl_availability'] ) ? max( 0, (int) $input['cache_ttl_availability'] ) : 60;
@@ -250,7 +259,7 @@ class WH_Settings_Page {
 			wp_die( esc_html__( 'Permission denied.', 'webhotelier' ) );
 		}
 		$test_nonce = wp_create_nonce( 'wh_test_connection' );
-		$view = __DIR__ . '/views/settings-page.php';
+		$view       = __DIR__ . '/views/settings-page.php';
 		if ( file_exists( $view ) ) {
 			include $view;
 			return;
@@ -298,16 +307,18 @@ class WH_Settings_Page {
 					$count = count( $result );
 				}
 			}
-			wp_send_json_success( array(
-				'mode'           => 'multi',
-				'account'        => __( 'Multi-property account', 'webhotelier' ),
-				'property_count' => $count,
-				'message'        => sprintf(
+			wp_send_json_success(
+				array(
+					'mode'           => 'multi',
+					'account'        => __( 'Multi-property account', 'webhotelier' ),
+					'property_count' => $count,
+					'message'        => sprintf(
 					/* translators: %d: number of properties */
-					__( 'Connected. %d properties available.', 'webhotelier' ),
-					$count
-				),
-			) );
+						__( 'Connected. %d properties available.', 'webhotelier' ),
+						$count
+					),
+				)
+			);
 		}
 
 		// Single-property probe.
@@ -321,22 +332,24 @@ class WH_Settings_Page {
 		$type     = isset( $result['type'] ) ? (string) $result['type'] : '';
 		$currency = isset( $result['currency'] ) ? (string) $result['currency'] : '';
 
-		wp_send_json_success( array(
-			'mode'     => 'single',
-			'account'  => __( 'Single-property account', 'webhotelier' ),
-			'property' => array(
-				'code'     => isset( $result['code'] ) ? (string) $result['code'] : $code,
-				'name'     => $name,
-				'type'     => $type,
-				'currency' => $currency,
-			),
-			'message'  => sprintf(
-				/* translators: 1: property name, 2: property code */
-				__( 'Connected to %1$s (%2$s).', 'webhotelier' ),
-				$name,
-				$code
-			),
-		) );
+		wp_send_json_success(
+			array(
+				'mode'     => 'single',
+				'account'  => __( 'Single-property account', 'webhotelier' ),
+				'property' => array(
+					'code'     => isset( $result['code'] ) ? (string) $result['code'] : $code,
+					'name'     => $name,
+					'type'     => $type,
+					'currency' => $currency,
+				),
+				'message'  => sprintf(
+					/* translators: 1: property name, 2: property code */
+					__( 'Connected to %1$s (%2$s).', 'webhotelier' ),
+					$name,
+					$code
+				),
+			)
+		);
 	}
 
 	/**
@@ -345,10 +358,13 @@ class WH_Settings_Page {
 	 * @param WP_Error $error
 	 */
 	protected function send_error_from_wp_error( $error ) {
-		wp_send_json_error( array(
-			'error_code' => $error->get_error_code(),
-			'error_msg'  => $error->get_error_message(),
-			'message'    => $error->get_error_message(),
-		), 200 );
+		wp_send_json_error(
+			array(
+				'error_code' => $error->get_error_code(),
+				'error_msg'  => $error->get_error_message(),
+				'message'    => $error->get_error_message(),
+			),
+			200
+		);
 	}
 }

@@ -75,7 +75,7 @@ class WH_Vouchers_PageTest extends WH_Admin_TestCase {
 
 	public function test_manage_rejects_bad_nonce() {
 		$vouchers = Mockery::mock( 'WH_Vouchers_API' );
-		$vouchers->shouldReceive( 'manageCode' )->never();
+		$vouchers->shouldReceive( 'manage_code' )->never();
 		$page = $this->make_page( $vouchers );
 		$this->stub_capability( true );
 		$this->stub_nonce_valid( false );
@@ -86,7 +86,7 @@ class WH_Vouchers_PageTest extends WH_Admin_TestCase {
 
 	public function test_manage_rejects_without_capability() {
 		$vouchers = Mockery::mock( 'WH_Vouchers_API' );
-		$vouchers->shouldReceive( 'manageCode' )->never();
+		$vouchers->shouldReceive( 'manage_code' )->never();
 		$page = $this->make_page( $vouchers );
 		$this->stub_capability( false );
 		$this->stub_nonce_valid( true );
@@ -97,7 +97,7 @@ class WH_Vouchers_PageTest extends WH_Admin_TestCase {
 
 	public function test_manage_create_calls_api_with_params() {
 		$vouchers = Mockery::mock( 'WH_Vouchers_API' );
-		$vouchers->shouldReceive( 'manageCode' )
+		$vouchers->shouldReceive( 'manage_code' )
 			->once()
 			->with( 'B1', 'SAVE10', Mockery::on( function ( $p ) {
 				return isset( $p['action'] ) && 'create' === $p['action'] && '10' === (string) $p['value'];
@@ -118,7 +118,7 @@ class WH_Vouchers_PageTest extends WH_Admin_TestCase {
 
 	public function test_manage_disable_sets_op_disable() {
 		$vouchers = Mockery::mock( 'WH_Vouchers_API' );
-		$vouchers->shouldReceive( 'manageCode' )
+		$vouchers->shouldReceive( 'manage_code' )
 			->once()
 			->with( 'B1', 'VIP', Mockery::on( function ( $p ) { return 'disable' === $p['action']; } ) )
 			->andReturn( array( 'code' => 'VIP', 'status' => 'disabled' ) );
@@ -136,7 +136,7 @@ class WH_Vouchers_PageTest extends WH_Admin_TestCase {
 
 	public function test_manage_error_redirects_with_error() {
 		$vouchers = Mockery::mock( 'WH_Vouchers_API' );
-		$vouchers->shouldReceive( 'manageCode' )->once()->andReturn( new \WP_Error( 'INVALID_PARAM', 'Bad code.' ) );
+		$vouchers->shouldReceive( 'manage_code' )->once()->andReturn( new \WP_Error( 'INVALID_PARAM', 'Bad code.' ) );
 		$page = $this->make_page( $vouchers );
 		$this->stub_capability( true );
 		$this->stub_nonce_valid( true );

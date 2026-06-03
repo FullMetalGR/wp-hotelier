@@ -9,6 +9,9 @@ if ( ! defined( 'ABSPATH' ) && ! defined( 'WH_TESTING' ) && ! defined( 'WH_TESTS
 	exit;
 }
 
+/**
+ * Admin Vouchers screen: lists voucher bundles and codes, and manages individual codes.
+ */
 class WH_Vouchers_Page {
 
 	const CAP   = 'manage_options';
@@ -20,6 +23,9 @@ class WH_Vouchers_Page {
 	/** @var WH_Vouchers_API */
 	protected $vouchers;
 
+	/**
+	 * Constructor. Injects the vouchers API.
+	 */
 	public function __construct( $vouchers ) {
 		$this->vouchers = $vouchers;
 	}
@@ -85,7 +91,13 @@ class WH_Vouchers_Page {
 		foreach ( $brows as $b ) {
 			$bid   = isset( $b['id'] ) ? (string) $b['id'] : '';
 			$bname = isset( $b['name'] ) ? (string) $b['name'] : $bid;
-			$url   = add_query_arg( array( 'page' => 'webhotelier-vouchers', 'bundle' => $bid ), admin_url( 'admin.php' ) );
+			$url   = add_query_arg(
+				array(
+					'page'   => 'webhotelier-vouchers',
+					'bundle' => $bid,
+				),
+				admin_url( 'admin.php' )
+			);
 			printf( '<li><a href="%s">%s</a> <code>%s</code></li>', esc_url( $url ), esc_html( $bname ), esc_html( $bid ) );
 		}
 		echo '</ul>';
@@ -162,7 +174,7 @@ class WH_Vouchers_Page {
 			$params['value'] = sanitize_text_field( (string) $post['discount'] );
 		}
 
-		$result = $this->vouchers->manageCode( $bundle, $code, $params );
+		$result = $this->vouchers->manage_code( $bundle, $code, $params );
 
 		$notice = is_wp_error( $result ) ? 'error' : 'voucher_ok';
 		$args   = array(

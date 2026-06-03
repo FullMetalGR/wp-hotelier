@@ -7,6 +7,9 @@
 
 defined( 'ABSPATH' ) || defined( 'WH_PATH' ) || defined( 'WH_TESTS_DIR' ) || exit;
 
+/**
+ * Helper for building WebHotelier photo/CDN resize URLs.
+ */
 class WH_Photo {
 
 	/**

@@ -10,6 +10,9 @@ if ( ! defined( 'ABSPATH' ) && ! defined( 'WH_TESTING' ) && ! defined( 'WH_TESTS
 	exit;
 }
 
+/**
+ * Admin bootstrap: registers the WebHotelier menu, submenu pages, asset enqueue, and AJAX/admin-post actions.
+ */
 class WH_Admin {
 
 	const MENU_SLUG = 'webhotelier';
@@ -34,6 +37,9 @@ class WH_Admin {
 	/** @var string[] Page hook suffixes owned by this plugin (for asset gating). */
 	protected $hook_suffixes = array();
 
+	/**
+	 * Constructor. Stores the injected plugin container, builds page controllers, and registers admin hooks.
+	 */
 	public function __construct( $plugin ) {
 		$this->plugin = $plugin;
 		$this->build_pages();
@@ -94,7 +100,7 @@ class WH_Admin {
 	 * Register the top-level menu and six submenus. Called on admin_menu.
 	 */
 	public function register_menu() {
-		$top = add_menu_page(
+		$top                   = add_menu_page(
 			__( 'WebHotelier', 'webhotelier' ),
 			__( 'WebHotelier', 'webhotelier' ),
 			self::CAP,
@@ -182,9 +188,9 @@ class WH_Admin {
 			'wh-admin',
 			'WHAdmin',
 			array(
-				'ajaxUrl'        => admin_url( 'admin-ajax.php' ),
-				'testNonce'      => wp_create_nonce( 'wh_test_connection' ),
-				'explorerNonce'  => wp_create_nonce( 'wh_explorer_run' ),
+				'ajaxUrl'       => admin_url( 'admin-ajax.php' ),
+				'testNonce'     => wp_create_nonce( 'wh_test_connection' ),
+				'explorerNonce' => wp_create_nonce( 'wh_explorer_run' ),
 			)
 		);
 	}
@@ -206,27 +212,48 @@ class WH_Admin {
 	/* ---- Menu render callbacks delegate to page controllers ---- */
 
 	public function render_settings() {
-		if ( ! current_user_can( self::CAP ) ) { wp_die( esc_html__( 'Permission denied.', 'webhotelier' ) ); }
+		if ( ! current_user_can( self::CAP ) ) {
+			wp_die( esc_html__( 'Permission denied.', 'webhotelier' ) ); }
 		$this->settings_page->render();
 	}
+	/**
+	 * Render the Bookings admin screen (capability-checked).
+	 */
 	public function render_bookings() {
-		if ( ! current_user_can( self::CAP ) ) { wp_die( esc_html__( 'Permission denied.', 'webhotelier' ) ); }
+		if ( ! current_user_can( self::CAP ) ) {
+			wp_die( esc_html__( 'Permission denied.', 'webhotelier' ) ); }
 		$this->bookings_page->render();
 	}
+	/**
+	 * Render the Statistics admin screen (capability-checked).
+	 */
 	public function render_stats() {
-		if ( ! current_user_can( self::CAP ) ) { wp_die( esc_html__( 'Permission denied.', 'webhotelier' ) ); }
+		if ( ! current_user_can( self::CAP ) ) {
+			wp_die( esc_html__( 'Permission denied.', 'webhotelier' ) ); }
 		$this->stats_page->render();
 	}
+	/**
+	 * Render the Vouchers admin screen (capability-checked).
+	 */
 	public function render_vouchers() {
-		if ( ! current_user_can( self::CAP ) ) { wp_die( esc_html__( 'Permission denied.', 'webhotelier' ) ); }
+		if ( ! current_user_can( self::CAP ) ) {
+			wp_die( esc_html__( 'Permission denied.', 'webhotelier' ) ); }
 		$this->vouchers_page->render();
 	}
+	/**
+	 * Render the Sync admin screen (capability-checked).
+	 */
 	public function render_sync() {
-		if ( ! current_user_can( self::CAP ) ) { wp_die( esc_html__( 'Permission denied.', 'webhotelier' ) ); }
+		if ( ! current_user_can( self::CAP ) ) {
+			wp_die( esc_html__( 'Permission denied.', 'webhotelier' ) ); }
 		$this->sync_page->render();
 	}
+	/**
+	 * Render the API Explorer admin screen (capability-checked).
+	 */
 	public function render_explorer() {
-		if ( ! current_user_can( self::CAP ) ) { wp_die( esc_html__( 'Permission denied.', 'webhotelier' ) ); }
+		if ( ! current_user_can( self::CAP ) ) {
+			wp_die( esc_html__( 'Permission denied.', 'webhotelier' ) ); }
 		$this->explorer_page->render();
 	}
 }

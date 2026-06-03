@@ -37,7 +37,7 @@ final class ShortcodeFlexCalendarTest extends WH_Public_TestCase {
 
 	public function test_renders_flexible_stay_options(): void {
 		$api = \Mockery::mock( 'WH_Availability_API' );
-		$api->shouldReceive( 'flexibleCalendar' )->once()->with( 'DEMO', \Mockery::type( 'array' ) )->andReturn(
+		$api->shouldReceive( 'flexible_calendar' )->once()->with( 'DEMO', \Mockery::type( 'array' ) )->andReturn(
 			array(
 				'currency' => 'EUR',
 				'stays'    => array(
@@ -59,7 +59,7 @@ final class ShortcodeFlexCalendarTest extends WH_Public_TestCase {
 
 	public function test_empty_stays_notice(): void {
 		$api = \Mockery::mock( 'WH_Availability_API' );
-		$api->shouldReceive( 'flexibleCalendar' )->andReturn( array( 'stays' => array() ) );
+		$api->shouldReceive( 'flexible_calendar' )->andReturn( array( 'stays' => array() ) );
 		$html = $this->shortcodes( $api )->render_flex_calendar( array() );
 		$this->assertStringContainsString( 'wh-empty', $html );
 	}

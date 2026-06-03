@@ -3,7 +3,7 @@
  * Booking flow: confirmation step (native path).
  *
  * @var string $res_id     Reservation id.
- * @var string $summaryUrl Booking summary URL.
+ * @var string $summary_url Booking summary URL.
  * @var array  $data       Full booking data.
  * @var string $class      Extra CSS classes.
  *
@@ -22,9 +22,9 @@ defined( 'ABSPATH' ) || defined( 'WH_PATH' ) || exit;
 			?>
 		</p>
 	<?php endif; ?>
-	<?php if ( '' !== $summaryUrl ) : ?>
+	<?php if ( '' !== $summary_url ) : ?>
 		<p class="wh-flow-confirmation__summary">
-			<a href="<?php echo esc_url( $summaryUrl ); ?>" rel="noopener" target="_blank">
+			<a href="<?php echo esc_url( $summary_url ); ?>" rel="noopener" target="_blank">
 				<?php echo esc_html__( 'View your booking summary', 'webhotelier' ); ?>
 			</a>
 		</p>

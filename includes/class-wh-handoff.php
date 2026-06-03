@@ -54,7 +54,7 @@ class WH_Handoff {
 				continue;
 			}
 			if ( is_array( $value ) ) {
-				$value = json_encode( $value );
+				$value = wp_json_encode( $value );
 			}
 			$query[ (string) $key ] = (string) $value;
 		}
@@ -89,6 +89,7 @@ if ( ! function_exists( 'wp_parse_url_compat' ) ) {
 		if ( function_exists( 'wp_parse_url' ) ) {
 			$parsed = wp_parse_url( $url );
 		} else {
+			// phpcs:ignore WordPress.WP.AlternativeFunctions.parse_url_parse_url -- Fallback only when wp_parse_url() is unavailable.
 			$parsed = parse_url( $url );
 		}
 		return is_array( $parsed ) ? $parsed : array();

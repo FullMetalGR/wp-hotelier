@@ -10,5 +10,6 @@
  * @var string     $nonce
  * @var string     $action
  */
-if ( ! defined( 'ABSPATH' ) && ! defined( 'WH_TESTING' ) && ! defined( 'WH_TESTS_DIR' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) && ! defined( 'WH_TESTING' ) && ! defined( 'WH_TESTS_DIR' ) ) {
+	exit; }
 $this->render_inline( $bundle_id, $bundles, $codes, $error, $nonce, $action );
