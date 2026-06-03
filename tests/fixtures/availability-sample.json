@@ -1,0 +1,87 @@
+{
+  "request_id": "req_demo_001",
+  "method": "availability",
+  "http_method": "GET",
+  "http_code": 200,
+  "error_code": "OK",
+  "error_msg": "",
+  "params": {
+    "checkin": "2026-08-01",
+    "checkout": "2026-08-08",
+    "adults": 4
+  },
+  "data": {
+    "code": "DEMO",
+    "name": "Demo Hotel",
+    "currency": "EUR",
+    "url": {
+      "website": "https://www.demohotel.com/",
+      "info": "https://demohotel.reserve-online.net/info",
+      "engine": "https://demohotel.reserve-online.net/?checkin=2026-08-01&checkout=2026-08-08&party=[{\"adults\":4}]&lang=en_GB",
+      "photo": "https://cdn.webhotelier.net/photos/w=1200:h=800:q=80/properties/demo/cover.jpg"
+    },
+    "location": {
+      "lat": 37.4467,
+      "lon": 25.3289
+    },
+    "rates": [
+      {
+        "id": 522770,
+        "type": "ZEN",
+        "room": "Villa Zen",
+        "rate": "Non-Refundable",
+        "rate_desc": "Best available non-refundable rate.",
+        "payment_policy": "Full prepayment required.",
+        "payment_policy_id": 11,
+        "cancellation_policy": "Non-refundable.",
+        "cancellation_policy_id": 22,
+        "cancellation_penalty": "100%",
+        "remaining": 1,
+        "min_stay": 7,
+        "cancellation_expiry": null,
+        "board": "Self Catering",
+        "url": {
+          "engine": "https://demohotel.reserve-online.net/?checkin=2026-08-01&checkout=2026-08-08&party=[{\"adults\":4}]&lang=en_GB&rate=522770",
+          "rate": "https://demohotel.reserve-online.net/rate/522770",
+          "room": "https://demohotel.reserve-online.net/room/ZEN",
+          "photo": "https://cdn.webhotelier.net/photos/w=1200:h=800:q=80/rooms/zen/main.jpg"
+        },
+        "pricing": {
+          "price": 14000.0,
+          "currency": "EUR"
+        },
+        "days": 7,
+        "status": "available",
+        "status_descr": "Available"
+      },
+      {
+        "id": 522771,
+        "type": "BOHEM",
+        "room": "Villa Bohem",
+        "rate": "Flexible",
+        "rate_desc": "Free cancellation up to 30 days before arrival.",
+        "payment_policy": "Deposit on booking.",
+        "payment_policy_id": 12,
+        "cancellation_policy": "Free cancellation until 30 days before check-in.",
+        "cancellation_policy_id": 23,
+        "cancellation_penalty": "0%",
+        "remaining": 2,
+        "min_stay": 5,
+        "cancellation_expiry": "2026-07-02",
+        "board": "Self Catering",
+        "url": {
+          "rate": "https://demohotel.reserve-online.net/rate/522771",
+          "room": "https://demohotel.reserve-online.net/room/BOHEM",
+          "photo": "https://cdn.webhotelier.net/photos/w=1200:h=800:q=80/rooms/bohem/main.jpg"
+        },
+        "pricing": {
+          "price": 16800.0,
+          "currency": "EUR"
+        },
+        "days": 7,
+        "status": "available",
+        "status_descr": "Available"
+      }
+    ]
+  }
+}
