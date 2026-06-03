@@ -1,0 +1,1037 @@
+# Copyright (C) 2026 ADS Solutions
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Hotelier 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/FullMetalGR/wp-hotelier/issues\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-06-03T10:40:43+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: webhotelier\n"
+
+#. Plugin Name of the plugin
+#: webhotelier.php
+#: admin/class-wh-admin.php:104
+#: admin/class-wh-admin.php:105
+msgid "WP Hotelier"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: webhotelier.php
+msgid "https://github.com/FullMetalGR/wp-hotelier"
+msgstr ""
+
+#. Description of the plugin
+#: webhotelier.php
+msgid "Connects WordPress to the WebHotelier booking API: settings, admin dashboards, API explorer, and a full frontend booking flow via shortcodes."
+msgstr ""
+
+#. Author of the plugin
+#: webhotelier.php
+msgid "ADS Solutions"
+msgstr ""
+
+#. Author URI of the plugin
+#: webhotelier.php
+msgid "https://ads-solutions.gr"
+msgstr ""
+
+#: admin/class-wh-admin.php:116
+#: admin/class-wh-admin.php:117
+msgid "Settings"
+msgstr ""
+
+#: admin/class-wh-admin.php:124
+#: admin/class-wh-admin.php:125
+#: admin/class-wh-bookings-page.php:120
+#: admin/class-wh-stats-page.php:228
+msgid "Bookings"
+msgstr ""
+
+#: admin/class-wh-admin.php:132
+#: admin/class-wh-admin.php:133
+#: admin/class-wh-stats-page.php:214
+msgid "Statistics"
+msgstr ""
+
+#: admin/class-wh-admin.php:140
+#: admin/class-wh-admin.php:141
+#: admin/class-wh-vouchers-page.php:79
+msgid "Vouchers"
+msgstr ""
+
+#: admin/class-wh-admin.php:148
+#: admin/class-wh-admin.php:149
+#: admin/class-wh-sync-page.php:78
+msgid "Sync"
+msgstr ""
+
+#: admin/class-wh-admin.php:156
+#: admin/class-wh-admin.php:157
+#: admin/class-wh-explorer-page.php:71
+msgid "API Explorer"
+msgstr ""
+
+#: admin/class-wh-admin.php:216
+#: admin/class-wh-admin.php:224
+#: admin/class-wh-admin.php:232
+#: admin/class-wh-admin.php:240
+#: admin/class-wh-admin.php:248
+#: admin/class-wh-admin.php:256
+#: admin/class-wh-bookings-page.php:78
+#: admin/class-wh-explorer-page.php:38
+#: admin/class-wh-settings-page.php:259
+#: admin/class-wh-stats-page.php:168
+#: admin/class-wh-sync-page.php:41
+#: admin/class-wh-vouchers-page.php:40
+msgid "Permission denied."
+msgstr ""
+
+#: admin/class-wh-bookings-page.php:134
+#: admin/class-wh-bookings-page.php:189
+#: public/templates/flow-review.php:47
+msgid "Last name"
+msgstr ""
+
+#: admin/class-wh-bookings-page.php:135
+#: admin/class-wh-bookings-page.php:190
+#: public/templates/flow-review.php:49
+msgid "Email"
+msgstr ""
+
+#: admin/class-wh-bookings-page.php:138
+msgid "Any status"
+msgstr ""
+
+#: admin/class-wh-bookings-page.php:143
+msgid "Source"
+msgstr ""
+
+#: admin/class-wh-bookings-page.php:144
+#: public/templates/search-form.php:63
+msgid "Search"
+msgstr ""
+
+#: admin/class-wh-bookings-page.php:149
+#: admin/class-wh-sync-page.php:88
+msgid "Res ID"
+msgstr ""
+
+#: admin/class-wh-bookings-page.php:149
+#: admin/class-wh-sync-page.php:88
+msgid "Guest"
+msgstr ""
+
+#: admin/class-wh-bookings-page.php:149
+#: admin/class-wh-bookings-page.php:191
+#: admin/class-wh-vouchers-page.php:113
+msgid "Status"
+msgstr ""
+
+#: admin/class-wh-bookings-page.php:149
+#: admin/class-wh-bookings-page.php:195
+#: admin/class-wh-sync-page.php:88
+#: public/templates/flex-calendar.php:21
+#: public/templates/search-form.php:32
+msgid "Check-in"
+msgstr ""
+
+#: admin/class-wh-bookings-page.php:149
+#: admin/class-wh-bookings-page.php:196
+#: public/templates/search-form.php:37
+msgid "Check-out"
+msgstr ""
+
+#: admin/class-wh-bookings-page.php:149
+#: admin/class-wh-bookings-page.php:197
+msgid "Total"
+msgstr ""
+
+#: admin/class-wh-bookings-page.php:152
+msgid "No reservations found."
+msgstr ""
+
+#: admin/class-wh-bookings-page.php:173
+msgid "View"
+msgstr ""
+
+#. translators: %s res id
+#: admin/class-wh-bookings-page.php:184
+#, php-format
+msgid "Reservation %s"
+msgstr ""
+
+#: admin/class-wh-bookings-page.php:188
+#: public/templates/flow-review.php:45
+msgid "First name"
+msgstr ""
+
+#: admin/class-wh-bookings-page.php:192
+msgid "Room"
+msgstr ""
+
+#: admin/class-wh-bookings-page.php:193
+msgid "Rate"
+msgstr ""
+
+#: admin/class-wh-bookings-page.php:194
+msgid "Board"
+msgstr ""
+
+#: admin/class-wh-bookings-page.php:198
+msgid "Currency"
+msgstr ""
+
+#: admin/class-wh-bookings-page.php:199
+#: public/templates/rate.php:31
+msgid "Payment policy"
+msgstr ""
+
+#: admin/class-wh-bookings-page.php:200
+#: public/templates/rate-card.php:74
+#: public/templates/rate.php:37
+msgid "Cancellation policy"
+msgstr ""
+
+#: admin/class-wh-bookings-page.php:211
+msgid "Cancel reservation"
+msgstr ""
+
+#: admin/class-wh-bookings-page.php:212
+#: includes/class-wh-endpoints.php:246
+msgid "Resend confirmation email"
+msgstr ""
+
+#: admin/class-wh-bookings-page.php:213
+#: admin/class-wh-sync-page.php:95
+msgid "Mark synced"
+msgstr ""
+
+#: admin/class-wh-bookings-page.php:222
+msgid "Are you sure?"
+msgstr ""
+
+#: admin/class-wh-bookings-page.php:235
+msgid "Purge permanently deletes the reservation. Continue?"
+msgstr ""
+
+#: admin/class-wh-bookings-page.php:241
+msgid "Purge"
+msgstr ""
+
+#: admin/class-wh-bookings-page.php:258
+#: admin/class-wh-explorer-page.php:132
+#: admin/class-wh-settings-page.php:288
+#: admin/class-wh-sync-page.php:161
+#: admin/class-wh-vouchers-page.php:162
+msgid "Permission denied or expired token."
+msgstr ""
+
+#: admin/class-wh-explorer-page.php:72
+msgid "Call any documented endpoint server-side and inspect the raw JSON."
+msgstr ""
+
+#: admin/class-wh-explorer-page.php:77
+msgid "Endpoint"
+msgstr ""
+
+#: admin/class-wh-explorer-page.php:104
+msgid "Run"
+msgstr ""
+
+#: admin/class-wh-explorer-page.php:138
+msgid "Unknown endpoint."
+msgstr ""
+
+#: admin/class-wh-settings-page.php:68
+msgid "API username"
+msgstr ""
+
+#: admin/class-wh-settings-page.php:69
+msgid "API password"
+msgstr ""
+
+#: admin/class-wh-settings-page.php:70
+msgid "API base URL"
+msgstr ""
+
+#: admin/class-wh-settings-page.php:71
+msgid "Mode"
+msgstr ""
+
+#: admin/class-wh-settings-page.php:72
+msgid "Default property code"
+msgstr ""
+
+#: admin/class-wh-settings-page.php:73
+msgid "Display currency"
+msgstr ""
+
+#: admin/class-wh-settings-page.php:74
+msgid "Locale"
+msgstr ""
+
+#: admin/class-wh-settings-page.php:75
+msgid "Booking completion"
+msgstr ""
+
+#: admin/class-wh-settings-page.php:76
+msgid "Open engine via"
+msgstr ""
+
+#: admin/class-wh-settings-page.php:77
+msgid "Content cache TTL (s)"
+msgstr ""
+
+#: admin/class-wh-settings-page.php:78
+msgid "Availability cache TTL (s)"
+msgstr ""
+
+#: admin/class-wh-settings-page.php:79
+msgid "Results page"
+msgstr ""
+
+#: admin/class-wh-settings-page.php:80
+msgid "Market country"
+msgstr ""
+
+#: admin/class-wh-settings-page.php:81
+msgid "Device"
+msgstr ""
+
+#: admin/class-wh-settings-page.php:82
+msgid "Map provider"
+msgstr ""
+
+#: admin/class-wh-settings-page.php:83
+msgid "Map API key"
+msgstr ""
+
+#: admin/class-wh-settings-page.php:84
+msgid "Debug mode"
+msgstr ""
+
+#: admin/class-wh-settings-page.php:113
+msgid "WebHotelier API & behaviour"
+msgstr ""
+
+#: admin/class-wh-settings-page.php:199
+#: admin/class-wh-settings-page.php:275
+msgid "Leave blank to keep current password."
+msgstr ""
+
+#: admin/class-wh-settings-page.php:208
+msgid "Enabled"
+msgstr ""
+
+#: admin/class-wh-settings-page.php:238
+msgid "Page ID where the search form submits."
+msgstr ""
+
+#: admin/class-wh-settings-page.php:268
+#: admin/views/settings-page.php:12
+msgid "WP Hotelier Settings"
+msgstr ""
+
+#: admin/class-wh-settings-page.php:274
+#: admin/class-wh-settings-page.php:276
+#: admin/views/settings-page.php:24
+#: admin/views/settings-page.php:29
+msgid "Test Connection"
+msgstr ""
+
+#: admin/class-wh-settings-page.php:313
+msgid "Multi-property account"
+msgstr ""
+
+#. translators: %d: number of properties
+#: admin/class-wh-settings-page.php:317
+#, php-format
+msgid "Connected. %d properties available."
+msgstr ""
+
+#: admin/class-wh-settings-page.php:338
+msgid "Single-property account"
+msgstr ""
+
+#. translators: 1: property name, 2: property code
+#: admin/class-wh-settings-page.php:347
+#, php-format
+msgid "Connected to %1$s (%2$s)."
+msgstr ""
+
+#: admin/class-wh-stats-page.php:49
+msgid "No data"
+msgstr ""
+
+#: admin/class-wh-stats-page.php:199
+msgid "Revenue per day"
+msgstr ""
+
+#: admin/class-wh-stats-page.php:200
+msgid "Revenue per country"
+msgstr ""
+
+#: admin/class-wh-stats-page.php:221
+msgid "From"
+msgstr ""
+
+#: admin/class-wh-stats-page.php:222
+msgid "To"
+msgstr ""
+
+#: admin/class-wh-stats-page.php:223
+#: public/templates/voucher-form.php:25
+msgid "Apply"
+msgstr ""
+
+#: admin/class-wh-stats-page.php:227
+msgid "Revenue"
+msgstr ""
+
+#: admin/class-wh-stats-page.php:229
+msgid "Room nights"
+msgstr ""
+
+#: admin/class-wh-stats-page.php:230
+msgid "ADR"
+msgstr ""
+
+#: admin/class-wh-sync-page.php:79
+msgid "Manual sync tools. No automatic scheduler runs."
+msgstr ""
+
+#: admin/class-wh-sync-page.php:87
+msgid "Pending bookings"
+msgstr ""
+
+#: admin/class-wh-sync-page.php:90
+msgid "No pending bookings."
+msgstr ""
+
+#: admin/class-wh-sync-page.php:96
+#: includes/class-wh-endpoints.php:296
+msgid "Push / ping"
+msgstr ""
+
+#: admin/class-wh-sync-page.php:102
+msgid "Push / ping tool"
+msgstr ""
+
+#: admin/class-wh-sync-page.php:107
+msgid "Reservation ID"
+msgstr ""
+
+#: admin/class-wh-sync-page.php:108
+msgid "Send push/ping"
+msgstr ""
+
+#: admin/class-wh-sync-page.php:119
+#: includes/class-wh-endpoints.php:306
+msgid "Booking sources"
+msgstr ""
+
+#: admin/class-wh-sync-page.php:120
+msgid "ID"
+msgstr ""
+
+#: admin/class-wh-sync-page.php:120
+msgid "Name"
+msgstr ""
+
+#: admin/class-wh-sync-page.php:120
+msgid "Channel"
+msgstr ""
+
+#: admin/class-wh-sync-page.php:120
+msgid "Public"
+msgstr ""
+
+#: admin/class-wh-sync-page.php:122
+msgid "No sources."
+msgstr ""
+
+#: admin/class-wh-sync-page.php:128
+#: admin/class-wh-sync-page.php:129
+msgid "Yes"
+msgstr ""
+
+#: admin/class-wh-sync-page.php:128
+#: admin/class-wh-sync-page.php:129
+msgid "No"
+msgstr ""
+
+#: admin/class-wh-vouchers-page.php:87
+msgid "Bundles"
+msgstr ""
+
+#: admin/class-wh-vouchers-page.php:89
+msgid "No bundles found."
+msgstr ""
+
+#. translators: %s bundle id
+#: admin/class-wh-vouchers-page.php:110
+#, php-format
+msgid "Codes in bundle %s"
+msgstr ""
+
+#: admin/class-wh-vouchers-page.php:113
+#: admin/class-wh-vouchers-page.php:140
+msgid "Code"
+msgstr ""
+
+#: admin/class-wh-vouchers-page.php:113
+#: admin/class-wh-vouchers-page.php:141
+msgid "Discount"
+msgstr ""
+
+#: admin/class-wh-vouchers-page.php:115
+msgid "No codes in this bundle."
+msgstr ""
+
+#: admin/class-wh-vouchers-page.php:129
+msgid "Disable"
+msgstr ""
+
+#: admin/class-wh-vouchers-page.php:135
+msgid "Create or update a code"
+msgstr ""
+
+#: admin/class-wh-vouchers-page.php:142
+msgid "Operation"
+msgstr ""
+
+#: admin/class-wh-vouchers-page.php:143
+msgid "Create"
+msgstr ""
+
+#: admin/class-wh-vouchers-page.php:144
+msgid "Update"
+msgstr ""
+
+#: admin/class-wh-vouchers-page.php:146
+msgid "Save code"
+msgstr ""
+
+#: admin/views/settings-page.php:25
+msgid "Save your credentials first. The password field is write-only — leave blank to keep current password."
+msgstr ""
+
+#: includes/api/class-wh-client.php:78
+msgid "Could not reach the WebHotelier API."
+msgstr ""
+
+#: includes/api/class-wh-client.php:85
+msgid "The WebHotelier API returned an unreadable response."
+msgstr ""
+
+#: includes/class-wh-activator.php:56
+msgid "Book Now"
+msgstr ""
+
+#: includes/class-wh-activator.php:62
+msgid "Booking Search Results"
+msgstr ""
+
+#: includes/class-wh-activator.php:68
+msgid "Find My Booking"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:30
+msgid "Property info"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:40
+msgid "Property search (multi)"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:50
+msgid "Rooms list"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:60
+msgid "Room detail"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:70
+msgid "Rates list"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:80
+msgid "Rate detail"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:90
+msgid "Extras list"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:102
+msgid "Availability (single)"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:112
+msgid "Availability (multi)"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:122
+msgid "Availability breakdown"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:132
+msgid "Availability calendar"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:142
+msgid "Flexible calendar"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:152
+#: public/templates/bar.php:19
+msgid "Best available rate"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:162
+msgid "Availability extras"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:172
+msgid "iCal feed"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:184
+msgid "Offers (multi)"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:194
+msgid "Offers (single)"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:204
+msgid "Offer detail"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:216
+msgid "Create booking"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:226
+msgid "Purge booking"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:236
+msgid "Cancel booking"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:256
+msgid "Search reservations"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:266
+msgid "Retrieve reservation"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:276
+msgid "Pending reservations"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:286
+msgid "Mark reservation synced"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:318
+msgid "Voucher bundles"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:328
+msgid "Voucher codes"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:338
+msgid "Manage voucher code"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:350
+msgid "Performance summary"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:360
+msgid "Performance per day"
+msgstr ""
+
+#: includes/class-wh-endpoints.php:370
+msgid "Performance per country"
+msgstr ""
+
+#: includes/class-wh-errors.php:24
+msgid "OK."
+msgstr ""
+
+#: includes/class-wh-errors.php:25
+#: public/class-wh-shortcodes.php:1278
+msgid "No availability for the selected dates."
+msgstr ""
+
+#: includes/class-wh-errors.php:26
+msgid "No properties matched your search."
+msgstr ""
+
+#: includes/class-wh-errors.php:27
+msgid "This request is not supported."
+msgstr ""
+
+#: includes/class-wh-errors.php:28
+msgid "One or more search parameters are invalid. Please review and try again."
+msgstr ""
+
+#: includes/class-wh-errors.php:29
+msgid "No properties were found for that location."
+msgstr ""
+
+#: includes/class-wh-errors.php:30
+msgid "This action is not allowed for your account."
+msgstr ""
+
+#: includes/class-wh-errors.php:31
+msgid "The requested item could not be found."
+msgstr ""
+
+#: includes/class-wh-errors.php:32
+msgid "Authentication is required to access this resource."
+msgstr ""
+
+#: includes/class-wh-errors.php:33
+msgid "The API credentials were rejected, or this method is not available for your account type."
+msgstr ""
+
+#: includes/class-wh-errors.php:34
+msgid "You do not have permission to perform this action."
+msgstr ""
+
+#: includes/class-wh-errors.php:35
+msgid "This rate is no longer available — the allotment has been depleted."
+msgstr ""
+
+#: includes/class-wh-errors.php:36
+msgid "The price has changed since you searched. Please retry your booking."
+msgstr ""
+
+#: includes/class-wh-errors.php:37
+msgid "Location search is temporarily unavailable. Please try again later."
+msgstr ""
+
+#: includes/class-wh-errors.php:38
+msgid "Your API account does not have permission for this operation."
+msgstr ""
+
+#: includes/class-wh-errors.php:39
+msgid "The requested property could not be found."
+msgstr ""
+
+#: includes/class-wh-errors.php:72
+msgid "An unexpected error occurred. Please try again."
+msgstr ""
+
+#: public/class-wh-booking-flow.php:238
+#: public/class-wh-booking-flow.php:334
+msgid "That rate is no longer available. Please search again."
+msgstr ""
+
+#: public/class-wh-booking-flow.php:355
+msgid "Booking link unavailable. Please try again."
+msgstr ""
+
+#: public/class-wh-booking-flow.php:378
+#: public/class-wh-proxy.php:492
+msgid "Only check-in or bank-transfer payment is allowed here."
+msgstr ""
+
+#: public/class-wh-booking-flow.php:388
+msgid "The price changed since you selected this rate. Please retry."
+msgstr ""
+
+#: public/class-wh-proxy.php:245
+#: public/class-wh-shortcodes.php:748
+msgid "A room code is required."
+msgstr ""
+
+#: public/class-wh-proxy.php:426
+msgid "A rate id is required."
+msgstr ""
+
+#: public/class-wh-proxy.php:474
+msgid "Native booking is disabled; use the hosted booking engine."
+msgstr ""
+
+#: public/class-wh-proxy.php:486
+msgid "Card data must never be sent to this site; use the hosted engine."
+msgstr ""
+
+#: public/class-wh-proxy.php:572
+msgid "A reservation id is required."
+msgstr ""
+
+#: public/class-wh-proxy.php:578
+msgid "Provide the email or last name on the booking."
+msgstr ""
+
+#: public/class-wh-proxy.php:584
+#: public/class-wh-proxy.php:588
+#: public/class-wh-shortcodes.php:1280
+msgid "No matching reservation was found."
+msgstr ""
+
+#: public/class-wh-shortcodes.php:866
+msgid "Both a room and a rate id are required."
+msgstr ""
+
+#: public/class-wh-shortcodes.php:946
+msgid "An offer id is required."
+msgstr ""
+
+#: public/class-wh-shortcodes.php:994
+msgid "Voucher / secret code"
+msgstr ""
+
+#: public/class-wh-shortcodes.php:1033
+msgid "Booking is currently unavailable."
+msgstr ""
+
+#: public/class-wh-shortcodes.php:1042
+#: public/templates/property.php:37
+msgid "Book now"
+msgstr ""
+
+#: public/class-wh-shortcodes.php:1088
+msgid "Booking engine is unavailable."
+msgstr ""
+
+#: public/class-wh-shortcodes.php:1277
+msgid "Searching…"
+msgstr ""
+
+#: public/class-wh-shortcodes.php:1279
+msgid "Something went wrong. Please try again."
+msgstr ""
+
+#: public/templates/availability.php:19
+msgid "No availability for the selected dates. Please try different dates."
+msgstr ""
+
+#: public/templates/bar.php:17
+msgid "Best rate not available."
+msgstr ""
+
+#: public/templates/bar.php:22
+#: public/templates/rate-card.php:85
+msgid "Book"
+msgstr ""
+
+#: public/templates/booking-engine.php:18
+msgid "Booking engine"
+msgstr ""
+
+#: public/templates/booking-lookup.php:22
+msgid "Reservation number"
+msgstr ""
+
+#: public/templates/booking-lookup.php:26
+msgid "Email on the booking"
+msgstr ""
+
+#: public/templates/booking-lookup.php:30
+msgid "or Last name"
+msgstr ""
+
+#: public/templates/booking-lookup.php:34
+msgid "Find my reservation"
+msgstr ""
+
+#: public/templates/calendar.php:27
+msgid "No calendar data available."
+msgstr ""
+
+#: public/templates/extras.php:15
+msgid "No extras available."
+msgstr ""
+
+#: public/templates/facilities.php:15
+msgid "No facilities listed."
+msgstr ""
+
+#: public/templates/flex-calendar.php:16
+msgid "No flexible stays available."
+msgstr ""
+
+#: public/templates/flex-calendar.php:22
+msgid "Nights"
+msgstr ""
+
+#: public/templates/flex-calendar.php:23
+msgid "Price"
+msgstr ""
+
+#: public/templates/flow-complete.php:23
+msgid "Secure booking"
+msgstr ""
+
+#: public/templates/flow-complete.php:26
+msgid "Redirecting you to secure booking…"
+msgstr ""
+
+#: public/templates/flow-complete.php:28
+#: public/templates/flow-review.php:62
+msgid "Continue to secure booking"
+msgstr ""
+
+#: public/templates/flow-confirmation.php:16
+msgid "Booking confirmed"
+msgstr ""
+
+#. translators: %s: reservation id.
+#: public/templates/flow-confirmation.php:21
+#, php-format
+msgid "Your reservation number is %s"
+msgstr ""
+
+#: public/templates/flow-confirmation.php:28
+msgid "View your booking summary"
+msgstr ""
+
+#: public/templates/flow-review.php:24
+msgid "Review your selection"
+msgstr ""
+
+#: public/templates/flow-review.php:51
+msgid "Phone"
+msgstr ""
+
+#: public/templates/flow-review.php:53
+msgid "Payment method"
+msgstr ""
+
+#: public/templates/flow-review.php:55
+msgid "Pay at check-in"
+msgstr ""
+
+#: public/templates/flow-review.php:56
+msgid "Bank transfer"
+msgstr ""
+
+#: public/templates/flow-review.php:58
+msgid "No card details are collected on this site."
+msgstr ""
+
+#: public/templates/flow-review.php:62
+msgid "Confirm booking"
+msgstr ""
+
+#: public/templates/gallery.php:15
+msgid "No photos available."
+msgstr ""
+
+#: public/templates/gallery.php:26
+msgid "Previous"
+msgstr ""
+
+#: public/templates/gallery.php:27
+msgid "Next"
+msgstr ""
+
+#: public/templates/my-bookings.php:17
+msgid "Please log in to see your bookings, or use the reservation lookup form."
+msgstr ""
+
+#: public/templates/my-bookings.php:20
+msgid "You have no bookings yet."
+msgstr ""
+
+#: public/templates/offer.php:35
+#: public/templates/offers.php:36
+msgid "Book this offer"
+msgstr ""
+
+#: public/templates/offers.php:15
+msgid "No offers available."
+msgstr ""
+
+#. translators: %s: formatted price per night.
+#: public/templates/price-from.php:17
+#, php-format
+msgid "from %s / night"
+msgstr ""
+
+#: public/templates/property-terms.php:17
+msgid "No terms available."
+msgstr ""
+
+#: public/templates/property.php:31
+msgid "Location"
+msgstr ""
+
+#. translators: %d: units left.
+#: public/templates/rate-card.php:59
+#, php-format
+msgid "%d left"
+msgid_plural "%d left"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: minimum nights.
+#: public/templates/rate-card.php:67
+#, php-format
+msgid "Min stay %d nights"
+msgstr ""
+
+#: public/templates/rates.php:15
+msgid "No rates available."
+msgstr ""
+
+#. translators: %d: maximum guests.
+#: public/templates/room.php:38
+#: public/templates/rooms.php:53
+#, php-format
+msgid "Sleeps up to %d"
+msgstr ""
+
+#: public/templates/room.php:57
+msgid "Book this villa"
+msgstr ""
+
+#: public/templates/rooms.php:18
+msgid "No rooms available."
+msgstr ""
+
+#: public/templates/search-form.php:42
+msgid "Adults"
+msgstr ""
+
+#: public/templates/search-form.php:47
+msgid "Children"
+msgstr ""
+
+#: public/templates/search-form.php:53
+msgid "Rooms"
+msgstr ""
+
+#: public/templates/search-results.php:26
+msgid "No availability found."
+msgstr ""
+
+#: public/templates/search-results.php:42
+msgid "No properties match your search."
+msgstr ""
+
+#. translators: %s: formatted price.
+#: public/templates/search-results.php:64
+#, php-format
+msgid "from %s"
+msgstr ""
+
+#: public/templates/search-results.php:69
+msgid "View & Book"
+msgstr ""

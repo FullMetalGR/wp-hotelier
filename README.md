@@ -63,6 +63,15 @@ The test suite uses PHPUnit with Brain Monkey + Mockery and a pluggable HTTP tra
 
 Code style is enforced with PHP_CodeSniffer against the WordPress Coding Standards (`phpcs.xml.dist`); run `composer lint:fix` to auto-fix what `phpcbf` can. Both the test suite and the linter run in CI on every push and pull request.
 
+## Translations
+
+The plugin is translation-ready (text domain `webhotelier`, loaded from `/languages`). A translation template is provided at [`languages/webhotelier.pot`](languages/webhotelier.pot). To translate, copy it to `languages/webhotelier-{locale}.po` (e.g. `webhotelier-el.po`), translate the strings, and compile to a `.mo`. To regenerate the template after changing source strings:
+
+```bash
+wp i18n make-pot . languages/webhotelier.pot --domain=webhotelier \
+  --exclude=vendor,tests,node_modules,.github,languages --package-name="WP Hotelier"
+```
+
 ## License
 
 GPL-2.0-or-later — see [LICENSE](LICENSE).
