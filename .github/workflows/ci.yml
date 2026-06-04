@@ -86,3 +86,22 @@ jobs:
 
       - name: Run PHP_CodeSniffer
         run: composer lint
+
+  fallow:
+    name: Fallow (JS/TS intelligence)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      # Fallow analyses the front-end scripts under admin/ and public/ assets
+      # (unused code, duplication, complexity). It only covers JS/TS — the PHP
+      # is handled by the PHPUnit and PHPCS jobs above.
+      - name: Fallow analysis
+        uses: fallow-rs/fallow@v2
+        with:
+          # Report-only for now: emit a job summary and inline annotations, but
+          # don't fail the build. Flip to 'true' to make this a hard gate once
+          # the asset baseline has been reviewed.
+          fail-on-issues: false
