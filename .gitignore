@@ -10,3 +10,6 @@ composer.lock
 # PHPUnit
 .phpunit.result.cache
 .phpunit.cache/
+
+# Fallow analysis cache (the committed baselines live in .github/fallow-baselines/)
+/.fallow/

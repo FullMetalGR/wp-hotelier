@@ -94,14 +94,28 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          # Full history so the audit can attribute new-vs-inherited findings
+          # against the base branch.
+          fetch-depth: 0
 
-      # Fallow analyses the front-end scripts under admin/ and public/ assets
+      # Fallow audits the front-end scripts under admin/ and public/ assets
       # (unused code, duplication, complexity). It only covers JS/TS — the PHP
       # is handled by the PHPUnit and PHPCS jobs above.
-      - name: Fallow analysis
+      #
+      # Gate: `audit` + `gate: new-only` fails the build only on findings the
+      # change introduces. The committed baselines under .github/fallow-baselines
+      # pin the existing asset findings as inherited, so they never trip the
+      # gate. Regenerate a baseline after intentionally changing the scripts:
+      #   npx fallow dead-code --save-baseline .github/fallow-baselines/dead-code.json
+      #   npx fallow health    --save-baseline .github/fallow-baselines/health.json
+      #   npx fallow dupes     --save-baseline .github/fallow-baselines/dupes.json
+      - name: Fallow audit (new-only gate)
         uses: fallow-rs/fallow@v2
         with:
-          # Report-only for now: emit a job summary and inline annotations, but
-          # don't fail the build. Flip to 'true' to make this a hard gate once
-          # the asset baseline has been reviewed.
-          fail-on-issues: false
+          command: audit
+          gate: new-only
+          fail-on-issues: true
+          dead-code-baseline: .github/fallow-baselines/dead-code.json
+          health-baseline: .github/fallow-baselines/health.json
+          dupes-baseline: .github/fallow-baselines/dupes.json

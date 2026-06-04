@@ -1,0 +1,48 @@
+{
+  "finding_counts": {
+    "admin/assets/js/admin.js": {
+      "complexity_critical": {
+        "count": 1
+      },
+      "crap_critical": {
+        "count": 2
+      },
+      "crap_high": {
+        "count": 1
+      },
+      "crap_moderate": {
+        "count": 1
+      }
+    },
+    "public/assets/js/calendar.js": {
+      "crap_high": {
+        "count": 1
+      },
+      "crap_moderate": {
+        "count": 3
+      }
+    },
+    "public/assets/js/map.js": {
+      "crap_high": {
+        "count": 1
+      }
+    },
+    "public/assets/js/public.js": {
+      "crap_critical": {
+        "count": 1
+      },
+      "crap_high": {
+        "count": 1
+      },
+      "crap_moderate": {
+        "count": 1
+      }
+    }
+  },
+  "runtime_coverage_findings": [],
+  "target_keys": [
+    "admin/assets/js/admin.js:untested risk",
+    "public/assets/js/public.js:untested risk",
+    "public/assets/js/calendar.js:untested risk"
+  ]
+}
