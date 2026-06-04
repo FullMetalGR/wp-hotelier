@@ -28,6 +28,24 @@ final class EndpointsTest extends WH_UnitTestCase {
 		}
 	}
 
+	public function test_every_path_placeholder_is_declared_as_a_param(): void {
+		// The API Explorer renders an input per declared param and resolve_path()
+		// fills {placeholders} from those params. A placeholder missing from
+		// params means the Explorer can never supply it (it resolves to '').
+		foreach ( ( new \WH_Endpoints() )->all() as $entry ) {
+			if ( ! preg_match_all( '/\{(\w+)\}/', (string) $entry['path_template'], $m ) ) {
+				continue;
+			}
+			foreach ( $m[1] as $placeholder ) {
+				$this->assertContains(
+					$placeholder,
+					$entry['params'],
+					"Path placeholder {{$placeholder}} is not declared in params for {$entry['key']}"
+				);
+			}
+		}
+	}
+
 	public function test_registry_covers_all_six_categories(): void {
 		$categories = array();
 		foreach ( ( new \WH_Endpoints() )->all() as $entry ) {
