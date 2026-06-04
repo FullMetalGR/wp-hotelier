@@ -13,3 +13,6 @@ composer.lock
 
 # Fallow analysis cache (the committed baselines live in .github/fallow-baselines/)
 /.fallow/
+
+# Playwright MCP scratch output (snapshots/screenshots from live inspection)
+/.playwright-mcp/

@@ -47,9 +47,12 @@ class WH_WP_Http implements WH_Http {
 		$response = wp_remote_request( $url, $args );
 
 		if ( is_wp_error( $response ) ) {
+			// Preserve the underlying reason (DNS/SSL/timeout) so the client can
+			// surface it instead of a blank "could not reach" message.
 			return array(
-				'code' => 0,
-				'body' => '',
+				'code'  => 0,
+				'body'  => '',
+				'error' => $response->get_error_message(),
 			);
 		}
 

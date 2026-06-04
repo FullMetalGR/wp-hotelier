@@ -75,14 +75,27 @@ class WH_Client {
 		$raw_body = isset( $response['body'] ) ? (string) $response['body'] : '';
 
 		if ( 0 === $code ) {
-			return new WP_Error( 'wh_transport', __( 'Could not reach the WebHotelier API.', 'webhotelier' ), array( 'http_code' => 0 ) );
+			$reason  = isset( $response['error'] ) ? trim( (string) $response['error'] ) : '';
+			$message = '' !== $reason
+				? sprintf(
+					/* translators: %s: underlying HTTP transport error, e.g. a cURL message. */
+					__( 'Could not reach the WebHotelier API: %s', 'webhotelier' ),
+					$reason
+				)
+				: __( 'Could not reach the WebHotelier API.', 'webhotelier' );
+			return new WP_Error( 'wh_transport', $message, array( 'http_code' => 0 ) );
 		}
 
 		$envelope = json_decode( $raw_body, true );
 		if ( ! is_array( $envelope ) ) {
 			return new WP_Error(
 				'wh_transport',
-				__( 'The WebHotelier API returned an unreadable response.', 'webhotelier' ),
+				sprintf(
+					/* translators: 1: HTTP status code; 2: short excerpt of the response body. */
+					__( 'The WebHotelier API returned an unreadable response (HTTP %1$d): %2$s', 'webhotelier' ),
+					$code,
+					self::body_excerpt( $raw_body )
+				),
 				array(
 					'http_code' => $code,
 					'raw'       => $raw_body,
@@ -146,6 +159,25 @@ class WH_Client {
 	 */
 	public function post( $path, array $args = array(), array $opts = array() ) {
 		return $this->request( 'POST', $path, $args, $opts );
+	}
+
+	/**
+	 * Build a short, human-readable excerpt of a raw response body for use in
+	 * error messages: strip markup, collapse whitespace, and truncate.
+	 *
+	 * @param string $raw Raw response body.
+	 * @return string
+	 */
+	private static function body_excerpt( $raw ) {
+		$text = trim( wp_strip_all_tags( (string) $raw ) );
+		$text = (string) preg_replace( '/\s+/', ' ', $text );
+		if ( '' === $text ) {
+			return __( '(empty response body)', 'webhotelier' );
+		}
+		if ( strlen( $text ) > 160 ) {
+			$text = substr( $text, 0, 159 ) . '…';
+		}
+		return $text;
 	}
 
 	/**

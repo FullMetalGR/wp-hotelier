@@ -18,6 +18,11 @@ final class ClientTest extends WH_UnitTestCase {
 		);
 		Functions\when( 'esc_url_raw' )->returnArg( 1 );
 		Functions\when( 'sanitize_text_field' )->returnArg( 1 );
+		Functions\when( 'wp_strip_all_tags' )->alias(
+			static function ( $s ) {
+				return trim( strip_tags( (string) $s ) );
+			}
+		);
 		Functions\when( 'absint' )->alias(
 			static function ( $v ) {
 				return abs( (int) $v );
@@ -172,6 +177,31 @@ final class ClientTest extends WH_UnitTestCase {
 		$result = $client->request( 'GET', '/property/DEMO' );
 		$this->assertInstanceOf( \WP_Error::class, $result );
 		$this->assertSame( 'wh_transport', $result->get_error_code() );
+	}
+
+	public function test_unreadable_response_message_includes_status_and_body_excerpt(): void {
+		$http   = ( new FakeHttp() )->queue( 502, '<html><body>Bad Gateway</body></html>' );
+		$client = $this->make_client( $http );
+		$result = $client->request( 'GET', '/property/DEMO' );
+
+		$this->assertInstanceOf( \WP_Error::class, $result );
+		$this->assertSame( 'wh_transport', $result->get_error_code() );
+		$message = $result->get_error_message();
+		// The status code and a readable excerpt of the body are surfaced, not hidden.
+		$this->assertStringContainsString( '502', $message );
+		$this->assertStringContainsString( 'Bad Gateway', $message );
+		// The full raw body is still captured in the error data for debugging.
+		$this->assertStringContainsString( 'Bad Gateway', (string) $result->get_error_data()['raw'] );
+	}
+
+	public function test_unreachable_message_includes_transport_reason(): void {
+		$http   = ( new FakeHttp() )->queue_error( 'cURL error 6: Could not resolve host: rest.reserve-online.net' );
+		$client = $this->make_client( $http );
+		$result = $client->request( 'GET', '/property/DEMO' );
+
+		$this->assertInstanceOf( \WP_Error::class, $result );
+		$this->assertSame( 'wh_transport', $result->get_error_code() );
+		$this->assertStringContainsString( 'Could not resolve host', $result->get_error_message() );
 	}
 
 	public function test_get_consults_cache_when_ttl_set_and_returns_cached(): void {

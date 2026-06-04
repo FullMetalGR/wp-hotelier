@@ -44,6 +44,22 @@ class FakeHttp implements \WH_Http {
 	}
 
 	/**
+	 * Queue a transport-level failure (code 0) carrying a reason, mirroring what
+	 * the production transport returns when wp_remote_request yields a WP_Error.
+	 *
+	 * @param string $message Underlying transport error message.
+	 * @return self
+	 */
+	public function queue_error( $message ) {
+		$this->queue[] = array(
+			'code'  => 0,
+			'body'  => '',
+			'error' => (string) $message,
+		);
+		return $this;
+	}
+
+	/**
 	 * @param string      $method  HTTP method.
 	 * @param string      $url     Full URL.
 	 * @param array       $headers Request headers.

@@ -322,7 +322,20 @@ class WH_Settings_Page {
 		}
 
 		// Single-property probe.
-		$code   = (string) $this->settings->get( 'default_property', '' );
+		$code = (string) $this->settings->get( 'default_property', '' );
+		if ( '' === $code ) {
+			// Without a property code the probe would hit /property/ and get a
+			// non-JSON response — fail fast with an actionable message instead.
+			$msg = __( 'Single-property mode needs a Default property code. Enter one and save, or switch Mode to multi-property.', 'webhotelier' );
+			wp_send_json_error(
+				array(
+					'error_code' => 'wh_no_property',
+					'error_msg'  => $msg,
+					'message'    => $msg,
+				),
+				200
+			);
+		}
 		$result = $this->property->info( $code );
 		if ( is_wp_error( $result ) ) {
 			$this->send_error_from_wp_error( $result );
@@ -358,11 +371,14 @@ class WH_Settings_Page {
 	 * @param WP_Error $error
 	 */
 	protected function send_error_from_wp_error( $error ) {
+		$data      = $error->get_error_data();
+		$http_code = ( is_array( $data ) && isset( $data['http_code'] ) ) ? (int) $data['http_code'] : 0;
 		wp_send_json_error(
 			array(
 				'error_code' => $error->get_error_code(),
 				'error_msg'  => $error->get_error_message(),
 				'message'    => $error->get_error_message(),
+				'http_code'  => $http_code,
 			),
 			200
 		);

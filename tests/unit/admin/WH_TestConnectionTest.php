@@ -128,6 +128,31 @@ class WH_TestConnectionTest extends WH_Admin_TestCase {
 		}
 	}
 
+	public function test_single_mode_with_empty_property_code_is_rejected_without_probing() {
+		$settings = Mockery::mock( 'WH_Settings' );
+		$settings->shouldReceive( 'get' )->with( 'mode', Mockery::any() )->andReturn( 'single' );
+		$settings->shouldReceive( 'get' )->with( 'default_property', Mockery::any() )->andReturn( '' );
+		$settings->shouldReceive( 'get' )->andReturn( '' );
+
+		// The API must never be hit when the property code is missing.
+		$property = Mockery::mock( 'WH_Property_API' );
+		$property->shouldReceive( 'info' )->never();
+		$property->shouldReceive( 'search' )->never();
+
+		$page = new \WH_Settings_Page( $settings, $property, 'single' );
+		$this->stub_nonce_valid( true );
+		$this->stub_capability( true );
+
+		try {
+			$page->ajax_test_connection();
+			$this->fail( 'expected halt' );
+		} catch ( WH_TC_JsonHalt $e ) {
+			$this->assertFalse( $e->success );
+			$this->assertSame( 'wh_no_property', $e->payload['error_code'] );
+			$this->assertStringContainsString( 'property code', $e->payload['message'] );
+		}
+	}
+
 	public function test_returns_error_code_on_wp_error() {
 		// Use the repo's WP_Error double (tests/unit/wp-stubs.php); is_wp_error()
 		// already recognises it.
