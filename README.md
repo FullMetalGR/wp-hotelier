@@ -63,6 +63,14 @@ The test suite uses PHPUnit with Brain Monkey + Mockery and a pluggable HTTP tra
 
 Code style is enforced with PHP_CodeSniffer against the WordPress Coding Standards (`phpcs.xml.dist`); run `composer lint:fix` to auto-fix what `phpcbf` can. Both the test suite and the linter run in CI on every push and pull request.
 
+The front-end JavaScript assets (`admin/` and `public/` `assets/js`) are checked in CI by [Fallow](https://fallow.tools/) (`fallow audit`). It runs as a **new-only gate**: only dead code, duplication, or complexity that a change *introduces* fails the build — the existing findings are pinned as baselines in `.github/fallow-baselines/`. After an intentional asset change, refresh the relevant baseline so the new state becomes the accepted one:
+
+```bash
+npx fallow dead-code --save-baseline .github/fallow-baselines/dead-code.json
+npx fallow health    --save-baseline .github/fallow-baselines/health.json
+npx fallow dupes     --save-baseline .github/fallow-baselines/dupes.json
+```
+
 ## Translations
 
 The plugin is translation-ready (text domain `webhotelier`, loaded from `/languages`). A translation template is provided at [`languages/webhotelier.pot`](languages/webhotelier.pot). To translate, copy it to `languages/webhotelier-{locale}.po` (e.g. `webhotelier-el.po`), translate the strings, and compile to a `.mo`. To regenerate the template after changing source strings:
